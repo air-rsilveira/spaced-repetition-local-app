@@ -5,4 +5,5 @@
  * via the `@/types` path alias.
  */
 
-export {};
+export type { Card, Deck, DeckList } from "./deck";
+export { cardSchema, deckSchema, deckListSchema } from "./deck";

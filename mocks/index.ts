@@ -5,4 +5,14 @@
  * `@/mocks` path alias.
  */
 
-export {};
+export {
+  makeCards,
+  makeDeck,
+  emptyDeckList,
+  singleDeckList,
+  mockDeckList,
+  deckWithDescription,
+  deckWithoutDescription,
+  deckWithZeroCards,
+} from "./decks";
+export type { MakeDeckOverrides } from "./decks";
