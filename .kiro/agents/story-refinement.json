@@ -1,0 +1,28 @@
+{
+  "name": "story-refinement",
+  "description": "Agente especializado em refinamento tecnico e quebra de historias do Trello. Le cards da coluna Refinamento, analisa o projeto (somente leitura) e cria cards refinados na coluna A Fazer apos validacao do usuario.",
+  "prompt": "file://./prompts/refinamento-tecnico.md",
+  "tools": [
+    "read",
+    "@trello_mcp"
+  ],
+  "allowedTools": [
+    "read",
+    "@trello_mcp/getmyboards",
+    "@trello_mcp/getlists",
+    "@trello_mcp/getcardsbylist",
+    "@trello_mcp/getcard",
+    "@trello_mcp/getmycards",
+    "@trello_mcp/getrecentactivity"
+  ],
+  "permissions": {
+    "rules": [
+      { "capability": "fs_read", "match": ["**"], "effect": "allow" },
+      { "capability": "fs_write", "match": ["**"], "effect": "deny" },
+      { "capability": "shell", "match": ["*"], "effect": "deny" }
+    ]
+  },
+  "resources": [
+    "file://.kiro/steering/**/*.md"
+  ]
+}
