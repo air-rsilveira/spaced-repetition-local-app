@@ -1,0 +1,809 @@
+
+> spaced-repetition-local-app@0.1.0 test
+> vitest run
+
+The plugin "vite-tsconfig-paths" is detected. Vite now supports tsconfig paths resolution natively via the resolve.tsconfigPaths option. You can remove the plugin and set resolve.tsconfigPaths: true in your Vite config instead.
+
+ RUN  v4.1.11 C:/Users/ricardo.silveira/projects/spaced-repetition-local-app
+
+ ÔØ» contexts/DecksContext.card-delete.test.tsx (1 test | 1 failed) 33ms
+     ├ù removes exactly target card and is idempotent for absent ids 31ms
+stderr | contexts/DecksContext.card-update.test.tsx > DecksContext.updateCard > preserves id/box/lastReviewed/createdAt and every other card/deck
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ÔØ» contexts/DecksContext.card-update.test.tsx (1 test | 1 failed) 216ms
+     ├ù preserves id/box/lastReviewed/createdAt and every other card/deck 213ms
+stderr | contexts/DecksContext.card-create.test.tsx > DecksContext.addCard > appends exactly one card with correct defaults and preserves the rest
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+An update to DecksProvider inside a test was not wrapped in act(...).
+
+When testing, code that causes React state updates should be wrapped into act(...):
+
+act(() => {
+  /* fire events that update state */
+});
+/* assert on the output */
+
+This ensures that you're testing the behavior the user would see in the browser. Learn more at https://react.dev/link/wrap-tests-with-act
+
+ ÔØ» contexts/DecksContext.card-create.test.tsx (1 test | 1 failed) 230ms
+     ├ù appends exactly one card with correct defaults and preserves the rest 227ms
+ ÔØ» components/CardForm.test.tsx (8 tests | 2 failed) 7063ms
+     ├ù displays overlong text error for front field 5013ms
+     ├ù closes overlay after successful submit in create mode 1214ms
+ ÔØ» lib/storage.test.ts (2 tests | 1 failed) 16727ms
+     ├ù saveDecks then loadDecks yields an equal deck list including all grown card fields 14546ms
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ» Failed Tests 6 ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»
+
+ FAIL  components/CardForm.test.tsx > CardForm > displays overlong text error for front field
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ÔØ» components/CardForm.test.tsx:180:3
+    178|   });
+    179|
+    180|   it("displays overlong text error for front field", async () => {
+       |   ^
+    181|     // Requirement 6.5: exceeds 5000 characters error
+    182|     const onClose = vi.fn();
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[1/6]ÔÄ»
+
+ FAIL  components/CardForm.test.tsx > CardForm > closes overlay after successful submit in create mode
+AssertionError: expected "vi.fn()" to be called at least once
+
+Ignored nodes: comments, script, style
+<html>
+  <head />
+  <body>
+    <div>
+      <div
+        aria-labelledby="_r_1h_"
+        aria-modal="true"
+        class="fixed inset-0 z-20 flex items-end justify-center bg-aws-anchor/60 p-4 sm:items-center"
+        role="dialog"
+      >
+        <div
+          class="w-full max-w-2xl rounded-lg border border-aws-gray-200 bg-aws-white p-6 shadow-lg sm:p-8"
+        >
+          <h2
+            class="text-xl font-semibold tracking-tight text-aws-gray-900 sm:text-2xl"
+            id="_r_1h_"
+          >
+            Create card
+          </h2>
+          <form
+            class="mt-6 flex flex-col gap-5"
+            novalidate=""
+          >
+            <div
+              class="flex flex-col gap-1.5"
+            >
+              <label
+                class="text-sm font-medium text-aws-gray-900"
+                for="_r_1i_"
+              >
+                Front
+              </label>
+              <textarea
+                class="rounded-md border border-aws-gray-400 bg-aws-white px-3 py-2 text-base text-aws-gray-900 outline-none focus:border-aws-blue focus:ring-2 focus:ring-aws-blue"
+                id="_r_1i_"
+                name="front"
+                rows="3"
+              >
+                aaaQauaeasataiaoana?aaaa
+              </textarea>
+            </div>
+            <div
+              class="flex flex-col gap-1.5"
+            >
+              <label
+                class="text-sm font-medium text-aws-gray-900"
+                for="_r_1k_"
+              >
+                Back
+              </label>
+              <textarea
+                class="rounded-md border border-aws-gray-400 bg-aws-white px-3 py-2 text-base text-aws-gray-900 outline-none focus:border-aws-blue focus:ring-2 focus:ring-aws-blue"
+                id="_r_1k_"
+                name="back"
+                rows="3"
+              >
+                aAanasawaeara.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+              </textarea>
+            </div>
+            <div
+              class="rounded-lg border border-aws-gray-200 bg-aws-gray-100 p-4"
+            >
+              <h3
+                class="text-sm font-medium text-aws-gray-900"
+              >
+                Preview
+              </h3>
+              <div
+                class="mt-3 space-y-3 text-sm text-aws-gray-900"
+                id="_r_1m_"
+              >
+                <div>
+                  <p
+                    class="mb-1 text-xs font-medium text-aws-gray-600 uppercase"
+                  >
+                    Front
+                  </p>
+                  <div
+                    class="prose prose-sm max-w-none text-aws-gray-900 dark:text-aws-white"
+                  >
+                    <p>
+                      aaaQauaeasataiaoana?aaaa
+                    </p>
+                  </div>
+                </div>
+                <div>
+                  <p
+                    class="mb-1 text-xs font-medium text-aws-gray-600 uppercase"
+                  >
+                    Back
+                  </p>
+                  <div
+                    class="prose prose-sm max-w-none text-aws-gray-900 dark:text-aws-white"
+                  >
+                    <p>
+                      aAanasawaeara.aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <p
+              class="text-sm font-medium text-aws-error"
+              id="_r_1n_"
+              role="alert"
+            >
+              No deck with id "deck-1".
+            </p>
+            <div
+              class="mt-2 flex flex-col gap-3 sm:flex-row-reverse sm:justify-start"
+            >
+              <button
+                class="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark"
+                type="submit"
+              >
+                Create card
+              </button>
+              <button
+                class="inline-flex h-11 items-center justify-center rounded-md border border-aws-gray-400 bg-aws-white px-6 text-sm font-semibold text-aws-blue transition-colors hover:bg-aws-gray-100"
+                type="button"
+              >
+                Cancel
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
+ ÔØ» components/CardForm.test.tsx:239:23
+    237|
+    238|     await waitFor(() => {
+    239|       expect(onClose).toHaveBeenCalled();
+       |                       ^
+    240|     });
+    241|   });
+ ÔØ» runWithExpensiveErrorDiagnosticsDisabled node_modules/@testing-library/dom/dist/config.js:47:12
+ ÔØ» checkCallback node_modules/@testing-library/dom/dist/wait-for.js:124:77
+ ÔØ» MutationObserver.checkRealTimersCallback node_modules/@testing-library/dom/dist/wait-for.js:118:16
+ ÔØ» MutationObserver.invokeTheCallbackFunction node_modules/jsdom/lib/generated/idl/MutationCallback.js:19:26
+ ÔØ» notifyMutationObservers node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:160:22
+ ÔØ» node_modules/jsdom/lib/jsdom/living/helpers/mutation-observers.js:133:5
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[2/6]ÔÄ»
+
+ FAIL  contexts/DecksContext.card-create.test.tsx > DecksContext.addCard > appends exactly one card with correct defaults and preserves the rest
+Error: Property failed after 1 tests
+{ seed: 312815839, path: "0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0", endOnFailure: true }
+Counterexample: [[{"id":" ","name":" ","cards":[],"createdAt":"1970-01-01T00:00:00.000Z"}],0,{"front":"!","back":"!"}]
+Shrunk 22 time(s)
+
+Hint: Enable verbose mode in order to have the list of all failing values encountered during the run
+ ÔØ» buildError node_modules/fast-check/lib/fast-check.js:2462:16
+ ÔØ» throwIfFailed node_modules/fast-check/lib/fast-check.js:2469:8
+ ÔØ» reportRunDetails node_modules/fast-check/lib/fast-check.js:2485:14
+ ÔØ» Module.assert node_modules/fast-check/lib/fast-check.js:2542:7
+ ÔØ» contexts/DecksContext.card-create.test.tsx:27:8
+     25| describe("DecksContext.addCard", () => {
+     26|   it("appends exactly one card with correct defaults and preserves theÔÇª
+     27|     fc.assert(
+       |        ^
+     28|       fc.property(
+     29|         fc.array(arbDeck, { minLength: 1, maxLength: 5 }),
+
+Caused by: AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ÔØ» contexts/DecksContext.card-create.test.tsx:49:32
+ ÔØ» Property.predicate node_modules/fast-check/lib/fast-check.js:1353:99
+ ÔØ» Property.run node_modules/fast-check/lib/fast-check.js:1322:24
+ ÔØ» runIt node_modules/fast-check/lib/fast-check.js:2505:24
+ ÔØ» check node_modules/fast-check/lib/fast-check.js:2537:204
+ ÔØ» Module.assert node_modules/fast-check/lib/fast-check.js:2540:14
+ ÔØ» contexts/DecksContext.card-create.test.tsx:27:8
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[3/6]ÔÄ»
+
+ FAIL  contexts/DecksContext.card-delete.test.tsx > DecksContext.deleteCard > removes exactly target card and is idempotent for absent ids
+Error: Property failed after 1 tests
+{ seed: 452323136, path: "0:0:0:0:0:0:0", endOnFailure: true }
+Counterexample: [[{"id":" ","name":" ","cards":[{"id":"card-1","front":"test","back":"test","box":1,"lastReviewed":null,"createdAt":"2024-01-01T00:00:00.000Z"}],"createdAt":"1970-01-01T00:00:00.000Z"}]]
+Shrunk 6 time(s)
+
+Hint: Enable verbose mode in order to have the list of all failing values encountered during the run
+ ÔØ» buildError node_modules/fast-check/lib/fast-check.js:2462:16
+ ÔØ» throwIfFailed node_modules/fast-check/lib/fast-check.js:2469:8
+ ÔØ» reportRunDetails node_modules/fast-check/lib/fast-check.js:2485:14
+ ÔØ» Module.assert node_modules/fast-check/lib/fast-check.js:2542:7
+ ÔØ» contexts/DecksContext.card-delete.test.tsx:24:8
+     22| describe("DecksContext.deleteCard", () => {
+     23|   it("removes exactly target card and is idempotent for absent ids", (ÔÇª
+     24|     fc.assert(
+       |        ^
+     25|       fc.property(
+     26|         fc.array(arbDeck, { minLength: 1, maxLength: 5 }).chain((decksÔÇª
+
+Caused by: AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ÔØ» contexts/DecksContext.card-delete.test.tsx:69:35
+ ÔØ» Property.predicate node_modules/fast-check/lib/fast-check.js:1353:99
+ ÔØ» Property.run node_modules/fast-check/lib/fast-check.js:1322:24
+ ÔØ» runIt node_modules/fast-check/lib/fast-check.js:2505:24
+ ÔØ» check node_modules/fast-check/lib/fast-check.js:2537:204
+ ÔØ» Module.assert node_modules/fast-check/lib/fast-check.js:2540:14
+ ÔØ» contexts/DecksContext.card-delete.test.tsx:24:8
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[4/6]ÔÄ»
+
+ FAIL  contexts/DecksContext.card-update.test.tsx > DecksContext.updateCard > preserves id/box/lastReviewed/createdAt and every other card/deck
+Error: Property failed after 1 tests
+{ seed: 1124984846, path: "0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0:0", endOnFailure: true }
+Counterexample: [[{"id":" ","name":" ","cards":[{"id":"card-1","front":"test","back":"test","box":1,"lastReviewed":null,"createdAt":"2024-01-01T00:00:00.000Z"}],"createdAt":"1970-01-01T00:00:00.000Z"}],{"front":"!","back":"!"}]
+Shrunk 25 time(s)
+
+Hint: Enable verbose mode in order to have the list of all failing values encountered during the run
+ ÔØ» buildError node_modules/fast-check/lib/fast-check.js:2462:16
+ ÔØ» throwIfFailed node_modules/fast-check/lib/fast-check.js:2469:8
+ ÔØ» reportRunDetails node_modules/fast-check/lib/fast-check.js:2485:14
+ ÔØ» Module.assert node_modules/fast-check/lib/fast-check.js:2542:7
+ ÔØ» contexts/DecksContext.card-update.test.tsx:25:8
+     23| describe("DecksContext.updateCard", () => {
+     24|   it("preserves id/box/lastReviewed/createdAt and every other card/decÔÇª
+     25|     fc.assert(
+       |        ^
+     26|       fc.property(
+     27|         fc.array(arbDeck, { minLength: 1, maxLength: 5 }).chain((decksÔÇª
+
+ Test Files  5 failed | 33 passed (38)
+      Tests  6 failed | 80 passed (86)
+   Start at  19:24:21
+   Duration  19.43s (transform 1.11s, setup 13.67s, import 9.52s, tests 31.75s, environment 56.87s)
+
+
+Caused by: AssertionError: expected false to be true // Object.is equality
+
+- Expected
++ Received
+
+- true
++ false
+
+ ÔØ» contexts/DecksContext.card-update.test.tsx:73:35
+ ÔØ» Property.predicate node_modules/fast-check/lib/fast-check.js:1353:99
+ ÔØ» Property.run node_modules/fast-check/lib/fast-check.js:1322:24
+ ÔØ» runIt node_modules/fast-check/lib/fast-check.js:2505:24
+ ÔØ» check node_modules/fast-check/lib/fast-check.js:2537:204
+ ÔØ» Module.assert node_modules/fast-check/lib/fast-check.js:2540:14
+ ÔØ» contexts/DecksContext.card-update.test.tsx:25:8
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[5/6]ÔÄ»
+
+ FAIL  lib/storage.test.ts > persistence round-trip > saveDecks then loadDecks yields an equal deck list including all grown card fields
+Error: Test timed out in 5000ms.
+If this is a long-running test, pass a timeout value as the last argument or configure it globally with "testTimeout".
+ ÔØ» lib/storage.test.ts:43:3
+     41|   // Feature: deck-detail-cards, Property 7 - Persistence round-trip pÔÇª
+     42|   // Validates: Requirements 7.7, 8.1, 8.2, 8.3
+     43|   it("saveDecks then loadDecks yields an equal deck list including allÔÇª
+       |   ^
+     44|     fc.assert(
+     45|       fc.property(fc.oneof(arbDeckList, arbLargeDeckList), (decks) => {
+
+ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»ÔÄ»[6/6]ÔÄ»
+

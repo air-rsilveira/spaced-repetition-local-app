@@ -22,7 +22,7 @@ vi.mock("@/contexts/DecksContext", () => ({
 const mockedUseDecks = vi.mocked(useDecks);
 
 /**
- * Build a `useDecks` return value. `addDeck` is a no-op stub because the
+ * Build a `useDecks` return value. Card actions are no-op stubs because the
  * Dashboard only reads `{ decks, status, error }`.
  */
 function makeStore(
@@ -37,6 +37,9 @@ function makeStore(
     addDeck: vi.fn(),
     updateDeck: vi.fn(),
     deleteDeck: vi.fn(),
+    addCard: vi.fn(),
+    updateCard: vi.fn(),
+    deleteCard: vi.fn(),
   };
 }
 

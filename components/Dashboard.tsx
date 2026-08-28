@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 import { useDecks } from "@/contexts/DecksContext";
 import DeckCard from "@/components/DeckCard";
@@ -132,7 +133,9 @@ export default function Dashboard() {
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {decks.map((deck) => (
             <li key={deck.id} className="flex flex-col gap-3">
-              <DeckCard deck={deck} />
+              <Link href={`/deck/${deck.id}`}>
+                <DeckCard deck={deck} />
+              </Link>
               <DeckCardActions
                 deck={deck}
                 onEdit={openEdit}

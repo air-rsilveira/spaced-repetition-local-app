@@ -48,8 +48,48 @@ export const arbCreatedAt: fc.Arbitrary<string> = fc
   })
   .map((d) => d.toISOString());
 
-/** A single valid card: `{ id: non-empty string }`. */
-export const arbCard: fc.Arbitrary<Card> = fc.record({ id: arbId });
+/**
+ * A valid card front: 1-5000 characters, non-empty after trimming.
+ * Built from a bounded core to ensure min length 1 after trimming.
+ */
+export const arbCardFront: fc.Arbitrary<string> = fc
+  .string({ minLength: 1, maxLength: 5000 })
+  .filter((s) => s.trim().length >= 1 && s.trim().length <= 5000);
+
+/**
+ * A valid card back: 1-5000 characters, non-empty after trimming.
+ * Built from a bounded core to ensure min length 1 after trimming.
+ */
+export const arbCardBack: fc.Arbitrary<string> = fc
+  .string({ minLength: 1, maxLength: 5000 })
+  .filter((s) => s.trim().length >= 1 && s.trim().length <= 5000);
+
+/**
+ * A valid leitner box number: an integer from 1 to 8 (representing a standard
+ * 8-box spaced repetition system). Matches the `box` field constraint in the
+ * card schema.
+ */
+export const arbBox: fc.Arbitrary<number> = fc.integer({ min: 1, max: 8 });
+
+/**
+ * A valid or null `lastReviewed`: either `null` (never reviewed) or a valid
+ * ISO timestamp. Matches the `lastReviewed` field in the card schema which is
+ * nullable (`.nullable()`).
+ */
+export const arbLastReviewed: fc.Arbitrary<string | null> = fc.option(
+  arbCreatedAt,
+  { nil: null },
+);
+
+/** A single valid card: `{ id, front, back, box, lastReviewed, createdAt }`. */
+export const arbCard: fc.Arbitrary<Card> = fc.record({
+  id: arbId,
+  front: arbCardFront,
+  back: arbCardBack,
+  box: arbBox,
+  lastReviewed: arbLastReviewed,
+  createdAt: arbCreatedAt,
+});
 
 /**
  * A bounded list of cards. The schema allows up to 1000; we cap at 20 for
@@ -134,6 +174,18 @@ export const arbDeckFormInput: fc.Arbitrary<DeckFormInput> = fc
     }
     return input;
   });
+
+/**
+ * A valid `CardFormInput`: front and back text fields, each 1-5000 characters
+ * and valid after trimming. Used for card creation and edit property tests
+ * (Requirements 7.2, 7.7).
+ */
+export const arbCardFormInput: fc.Arbitrary<
+  { front: string; back: string }
+> = fc.record({
+  front: arbCardFront,
+  back: arbCardBack,
+});
 
 /**
  * An invalid name that is empty or whitespace-only. After trimming these
@@ -264,3 +316,28 @@ export const arbGarbageStorage: fc.Arbitrary<string> = fc.oneof(
     )
     .map((value) => JSON.stringify(value)),
 );
+
+/**
+ * An invalid card front/back that is empty or whitespace-only. After trimming
+ * these collapse to the empty string, so `cardFormSchema` rejects them with
+ * the "Front is required" or "Back is required" message (Requirements 7.2, 7.7).
+ */
+export const arbEmptyOrWhitespace: fc.Arbitrary<string> = fc.oneof(
+  fc.constant(""),
+  // Whitespace-only strings (spaces, tabs, newlines) of length 1-20.
+  fc
+    .array(fc.constantFrom(" ", "\t", "\n", "\r", "\f", "\v"), {
+      minLength: 1,
+      maxLength: 20,
+    })
+    .map((chars) => chars.join("")),
+);
+
+/**
+ * An invalid card front/back that exceeds 5000 characters, triggering the
+ * "Front exceeds 5000 characters" or "Back exceeds 5000 characters"
+ * rejection (Requirements 7.2, 7.7).
+ */
+export const arbOverlongText: fc.Arbitrary<string> = fc
+  .integer({ min: 5001, max: 8000 })
+  .map((length) => "a".repeat(length));

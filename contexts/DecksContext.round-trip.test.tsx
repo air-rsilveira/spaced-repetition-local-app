@@ -27,7 +27,24 @@ function wrapper({ children }: { children: ReactNode }) {
 
 describe("contexts/DecksContext round-trip persistence", () => {
   it("re-hydrates exactly one deck matching the added deck's id and content", async () => {
-    const cards: Card[] = [{ id: "card-1" }, { id: "card-2" }];
+    const cards: Card[] = [
+      {
+        id: "card-1",
+        front: "Bonjour?",
+        back: "Hello",
+        box: 1,
+        lastReviewed: null,
+        createdAt: "2024-01-01T00:00:00.000Z",
+      },
+      {
+        id: "card-2",
+        front: "Merci?",
+        back: "Thank you",
+        box: 1,
+        lastReviewed: null,
+        createdAt: "2024-01-01T00:00:00.000Z",
+      },
+    ];
     const input = {
       id: "deck-round-trip",
       name: "French Vocabulary",

@@ -11,11 +11,17 @@
 import type { Card, Deck, DeckList } from "@/types";
 
 /**
- * Build `count` placeholder cards with stable, non-empty ids.
+ * Build `count` placeholder cards with stable, non-empty ids and valid
+ * default values for all required fields (front, back, box, lastReviewed, createdAt).
  */
 export function makeCards(count: number, idPrefix = "card"): Card[] {
   return Array.from({ length: count }, (_, i) => ({
     id: `${idPrefix}-${i + 1}`,
+    front: `Front ${i + 1}`,
+    back: `Back ${i + 1}`,
+    box: 1,
+    lastReviewed: null,
+    createdAt: "2024-01-01T00:00:00.000Z",
   }));
 }
 

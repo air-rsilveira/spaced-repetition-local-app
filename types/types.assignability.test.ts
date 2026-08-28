@@ -42,7 +42,16 @@ describe("@/types exports and z.infer assignability", () => {
     const deck: Deck = {
       id: "deck-1",
       name: "Capitals",
-      cards: [{ id: "card-1" }],
+      cards: [
+        {
+          id: "card-1",
+          front: "What is the capital of France?",
+          back: "Paris",
+          box: 1,
+          lastReviewed: null,
+          createdAt: "2024-01-01T00:00:00.000Z",
+        },
+      ],
       createdAt: "2024-01-01T00:00:00.000Z",
     };
 

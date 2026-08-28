@@ -1,0 +1,218 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "1.1 Grow `cardSchema` and add `cardFormSchema` in `types/deck.ts`": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953122950
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953169277
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953295855
+      }
+    ],
+    "2.1 Grow `arbCard` and add card-form-input arbitraries in `test/arbitraries.ts`": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123041
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953302553
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953546102
+      }
+    ],
+    "3.1 Add card action types and generalize the validation error helper": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123120
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953611638
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954003844
+      }
+    ],
+    "3.2 Implement `addCard`, `updateCard`, and `deleteCard`": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123186
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954003899
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954083559
+      }
+    ],
+    "4. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123281
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954094586
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954137828
+      }
+    ],
+    "6.1 Add `react-markdown` and `remark-gfm`": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123330
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953302518
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953546174
+      }
+    ],
+    "7.1 Implement `components/Markdown.tsx`": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123379
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954418546
+      }
+    ],
+    "8.1 Implement `components/CardForm.tsx` (`\"use client\"`)": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123430
+      }
+    ],
+    "9.1 Implement `components/CardItem.tsx` and `components/CardItemActions.tsx`": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123513
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954418646
+      }
+    ],
+    "9.2 Implement `components/CardList.tsx`": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123573
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954418725
+      }
+    ],
+    "10.1 Implement `app/deck/[id]/page.tsx` (`\"use client\"`)": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123642
+      }
+    ],
+    "11.1 Run full verification": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953123692
+      },
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954584838
+      }
+    ],
+    "1. Grow the card domain type and schema": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953295922
+      }
+    ],
+    "2. Update shared test arbitraries": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953546224
+      }
+    ],
+    "6. Install markdown dependencies": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953546327
+      }
+    ],
+    "1.2 Extend `types/deck.test.ts` with the card schema round-trip property": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787953586468
+      }
+    ],
+    "3. Extend the decks store with card create/update/delete": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954083664
+      }
+    ],
+    "7. Create the reusable markdown view": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954418774
+      }
+    ],
+    "11. Final checkpoint - Ensure the feature is wired and verified": [
+      {
+        "executionId": "70974a3f-4a6e-4b61-8ef3-dd77553c89d7",
+        "chatSessionId": "sess_2195136a-4970-4bd2-82de-2fa4a9f70914",
+        "timestamp": 1787954584905
+      }
+    ]
+  }
+}
