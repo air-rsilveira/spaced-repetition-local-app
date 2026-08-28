@@ -43,6 +43,7 @@ describe("@/types exports and z.infer assignability", () => {
       id: "deck-1",
       name: "Capitals",
       cards: [{ id: "card-1" }],
+      createdAt: "2024-01-01T00:00:00.000Z",
     };
 
     expectTypeOf(deck).toMatchTypeOf<Deck>();
@@ -53,7 +54,13 @@ describe("@/types exports and z.infer assignability", () => {
 
   it("treats a parsed deck list as a DeckList", () => {
     const list: DeckList = deckListSchema.parse([
-      { id: "deck-1", name: "Capitals", description: "Geo", cards: [] },
+      {
+        id: "deck-1",
+        name: "Capitals",
+        description: "Geo",
+        cards: [],
+        createdAt: "2024-01-01T00:00:00.000Z",
+      },
     ]);
 
     expectTypeOf(list).toEqualTypeOf<DeckList>();

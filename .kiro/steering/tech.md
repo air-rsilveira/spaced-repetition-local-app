@@ -30,6 +30,14 @@
   (or in `/types` when shared) and infer types with `z.infer`. Validate on both
   the client and any server route handlers.
 
+## Testing
+
+- **Vitest** (`jsdom` environment, globals enabled) with **@testing-library/react**
+  and **@testing-library/jest-dom**. Setup lives in `vitest.setup.ts`.
+- **fast-check** for property-based tests; shared arbitraries live in `/test`.
+- Colocate `*.test.ts(x)` files with the code under test. The `@/*` alias
+  resolves in tests via `vite-tsconfig-paths`.
+
 ## Linting
 
 - **ESLint** with the Next.js config (`next/core-web-vitals` + TypeScript).
@@ -48,4 +56,5 @@ npm run dev     # start the local dev server (http://localhost:3000)
 npm run build   # production build
 npm run start   # run the production build
 npm run lint    # run ESLint
+npm run test    # run the Vitest suite once
 ```

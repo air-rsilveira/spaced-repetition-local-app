@@ -16,9 +16,12 @@ const arbWhitespaceName: fc.Arbitrary<string> = fc.string({
 });
 
 describe("Decks store rejects whitespace-only names", () => {
-  // Feature: walking-skeleton, Property 2: Empty or whitespace-only names are rejected
-  // Validates: Requirements 2.5
-  it("returns a name-required error and leaves the deck list unchanged", () => {
+  // Feature: deck-crud, validates the deck-crud validation contract:
+  // empty/whitespace-only names are rejected by `addDeck` via `deckFormSchema`,
+  // surfacing a `{ code: "validation", fields: { name } }` error while leaving
+  // the deck list unchanged.
+  // Validates: Requirements 1.8, 4.8
+  it("returns a validation error identifying the name field and leaves the deck list unchanged", () => {
     fc.assert(
       fc.property(arbWhitespaceName, (name) => {
         const { result } = renderHook(() => useDecks(), {
@@ -35,12 +38,17 @@ describe("Decks store rejects whitespace-only names", () => {
             outcome = result.current.addDeck({ name });
           });
 
-          // The operation is rejected with the name-required error.
+          // The operation is rejected with a validation error that identifies
+          // the offending name field.
           expect(outcome.ok).toBe(false);
           if (outcome.ok) {
             throw new Error("expected addDeck to reject a whitespace-only name");
           }
-          expect(outcome.error.code).toBe("name-required");
+          expect(outcome.error.code).toBe("validation");
+          if (outcome.error.code !== "validation") {
+            throw new Error("expected a validation error");
+          }
+          expect(outcome.error.fields.name).toBeTruthy();
 
           // The exposed deck list is left unchanged.
           expect(result.current.decks).toEqual(before);

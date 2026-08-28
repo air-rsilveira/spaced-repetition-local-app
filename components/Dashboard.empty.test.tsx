@@ -28,6 +28,8 @@ describe("Dashboard empty state", () => {
       status: "ready",
       error: null,
       addDeck: vi.fn(),
+      updateDeck: vi.fn(),
+      deleteDeck: vi.fn(),
     });
 
     const { container } = render(<Dashboard />);

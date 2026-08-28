@@ -32,15 +32,17 @@ export interface MakeDeckOverrides {
   description?: string;
   cards?: Card[];
   cardCount?: number;
+  createdAt?: string;
 }
 
 export function makeDeck(overrides: MakeDeckOverrides = {}): Deck {
-  const { id, name, description, cards, cardCount } = overrides;
+  const { id, name, description, cards, cardCount, createdAt } = overrides;
 
   const deck: Deck = {
     id: id ?? "deck-1",
     name: name ?? "Sample Deck",
     cards: cards ?? makeCards(cardCount ?? 0),
+    createdAt: createdAt ?? "2024-01-01T00:00:00.000Z",
   };
 
   if (description !== undefined) {

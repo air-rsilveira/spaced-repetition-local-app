@@ -1,16 +1,25 @@
+"use client";
+
 /**
  * EmptyState — shown on the Dashboard when the Decks_Store contains no decks.
  *
  * Renders a "no decks" message plus two entry points: create-deck and
- * import-deck. The flows are stubs for later slices, so the buttons are present
- * and labelled but do not yet initiate any flow. They are accessible
- * `<button type="button">` elements so they remain queryable by role in tests.
+ * import-deck. The "Create deck" button opens the deck form in create mode via
+ * the `onCreate` callback supplied by the Dashboard (Requirement 1.1). The
+ * "Import deck" button remains a stub for a later slice — it is present and
+ * labelled but does not yet initiate a flow.
  *
- * Server Component: no interactivity, state, or browser APIs are required here.
+ * Client Component: the "Create deck" button attaches an `onClick` handler, so
+ * this component needs interactivity.
  *
- * Requirements: 6.2, 6.3
+ * Requirements: 1.1, 6.2, 6.3
  */
-export default function EmptyState() {
+interface EmptyStateProps {
+  /** Opens the deck form in create mode. */
+  onCreate: () => void;
+}
+
+export default function EmptyState({ onCreate }: EmptyStateProps) {
   return (
     <section
       aria-labelledby="empty-state-heading"
@@ -30,6 +39,7 @@ export default function EmptyState() {
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <button
             type="button"
+            onClick={onCreate}
             className="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark"
           >
             Create deck

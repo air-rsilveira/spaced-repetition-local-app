@@ -11,7 +11,9 @@ import {
 } from "react";
 
 import { loadDecks, saveDecks } from "@/lib/storage";
+import { deckFormSchema } from "@/types";
 import type { Card, Deck, DeckList } from "@/types";
+import type { z } from "zod";
 
 // Re-export DeckList so the store's public types are available from this module.
 export type { DeckList } from "@/types";
@@ -36,14 +38,37 @@ export interface AddDeckInput {
   id?: string;
 }
 
+/** Fields that a `validation` error can flag on the deck form. */
+export type DeckFormField = "name" | "description";
+
 export type DecksError =
   | { code: "name-required"; message: string }
   | { code: "duplicate-id"; message: string }
   | { code: "persistence"; message: string }
-  | { code: "invalid-data"; message: string };
+  | { code: "invalid-data"; message: string }
+  | {
+      code: "validation";
+      message: string;
+      fields: Partial<Record<DeckFormField, string>>;
+    }
+  | { code: "not-found"; message: string };
 
 export type AddDeckResult =
   | { ok: true; deck: Deck }
+  | { ok: false; error: DecksError };
+
+export interface UpdateDeckInput {
+  id: string;
+  name: string;
+  description?: string;
+}
+
+export type UpdateDeckResult =
+  | { ok: true; deck: Deck }
+  | { ok: false; error: DecksError };
+
+export type DeleteDeckResult =
+  | { ok: true; id: string }
   | { ok: false; error: DecksError };
 
 export interface DecksContextValue {
@@ -54,6 +79,31 @@ export interface DecksContextValue {
   /** Last surfaced error, or `null`. */
   error: DecksError | null;
   addDeck: (input: AddDeckInput) => AddDeckResult;
+  updateDeck: (input: UpdateDeckInput) => UpdateDeckResult;
+  deleteDeck: (id: string) => DeleteDeckResult;
+}
+
+/**
+ * Map a `deckFormSchema` validation failure to a `{ code: "validation", fields }`
+ * error, collecting a per-field message keyed by the offending field so the
+ * Deck_Form can render each message inline (Requirements 4.7, 4.8).
+ */
+function toValidationError(
+  error: z.ZodError<{ name: string; description?: string }>,
+): Extract<DecksError, { code: "validation" }> {
+  const fields: Partial<Record<DeckFormField, string>> = {};
+  for (const issue of error.issues) {
+    const field = issue.path[0];
+    if (field === "name" || field === "description") {
+      // Keep the first message per field.
+      fields[field] ??= issue.message;
+    }
+  }
+  return {
+    code: "validation",
+    message: "Deck input is invalid.",
+    fields,
+  };
 }
 
 const DecksContext = createContext<DecksContextValue | undefined>(undefined);
@@ -121,14 +171,14 @@ export function DecksProvider({ children }: DecksProviderProps) {
 
   const addDeck = useCallback(
     (input: AddDeckInput): AddDeckResult => {
-      const name = input.name.trim();
-      if (name.length === 0) {
-        const nameError: DecksError = {
-          code: "name-required",
-          message: "Deck name is required.",
-        };
-        setError(nameError);
-        return { ok: false, error: nameError };
+      const parsed = deckFormSchema.safeParse({
+        name: input.name,
+        description: input.description,
+      });
+      if (!parsed.success) {
+        const error = toValidationError(parsed.error);
+        setError(error);
+        return { ok: false, error }; // list unchanged (Requirements 1.8, 4.7, 4.8)
       }
 
       const id = input.id ?? crypto.randomUUID();
@@ -141,11 +191,12 @@ export function DecksProvider({ children }: DecksProviderProps) {
         return { ok: false, error: duplicateError };
       }
 
-      const description = input.description?.trim();
+      const description = parsed.data.description?.trim();
       const deck: Deck = {
         id,
-        name,
+        name: parsed.data.name, // already trimmed by schema
         cards: input.cards ?? [],
+        createdAt: new Date().toISOString(),
         ...(description ? { description } : {}),
       };
 
@@ -157,7 +208,69 @@ export function DecksProvider({ children }: DecksProviderProps) {
     [decks],
   );
 
-  const value: DecksContextValue = { decks, status, error, addDeck };
+  const updateDeck = useCallback(
+    (input: UpdateDeckInput): UpdateDeckResult => {
+      const parsed = deckFormSchema.safeParse({
+        name: input.name,
+        description: input.description,
+      });
+      if (!parsed.success) {
+        const error = toValidationError(parsed.error);
+        setError(error);
+        return { ok: false, error };
+      }
+
+      const index = decks.findIndex((deck) => deck.id === input.id);
+      if (index === -1) {
+        const error: DecksError = {
+          code: "not-found",
+          message: `No deck with id "${input.id}".`,
+        };
+        setError(error);
+        return { ok: false, error }; // list unchanged (Requirement 2.8)
+      }
+
+      const description = parsed.data.description?.trim();
+      const existing = decks[index];
+      const updated: Deck = {
+        ...existing, // preserves id, createdAt, cards
+        name: parsed.data.name, // already trimmed by schema
+        ...(description ? { description } : { description: undefined }),
+      };
+
+      setError(null);
+      setDecks((prev) =>
+        prev.map((deck) => (deck.id === input.id ? updated : deck)),
+      );
+      return { ok: true, deck: updated };
+    },
+    [decks],
+  );
+
+  const deleteDeck = useCallback(
+    (id: string): DeleteDeckResult => {
+      if (!decks.some((deck) => deck.id === id)) {
+        const error: DecksError = {
+          code: "not-found",
+          message: `No deck with id "${id}".`,
+        };
+        return { ok: false, error }; // no removal, list unchanged (Requirement 3.9)
+      }
+      setError(null);
+      setDecks((prev) => prev.filter((deck) => deck.id !== id));
+      return { ok: true, id };
+    },
+    [decks],
+  );
+
+  const value: DecksContextValue = {
+    decks,
+    status,
+    error,
+    addDeck,
+    updateDeck,
+    deleteDeck,
+  };
 
   return (
     <DecksContext.Provider value={value}>{children}</DecksContext.Provider>

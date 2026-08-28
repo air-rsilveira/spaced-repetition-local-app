@@ -9,7 +9,7 @@
  * persistence round-trip). Import via the `@/test/arbitraries` alias.
  */
 import fc from "fast-check";
-import type { Card, Deck } from "@/types";
+import type { Card, Deck, DeckFormInput } from "@/types";
 import { NAV_ITEMS } from "@/components/NavLinks";
 
 /** A non-empty id string (satisfies `z.string().min(1)`). */
@@ -32,6 +32,21 @@ export const arbDescription: fc.Arbitrary<string | undefined> = fc.option(
   fc.string({ maxLength: 500 }),
   { nil: undefined },
 );
+
+/**
+ * A valid `createdAt`: an ISO 8601 timestamp string that parses as a real date
+ * and stays within the schema's 1-30 character bound. Built by mapping a
+ * bounded `fc.date()` through `.toISOString()` (which yields 24-char strings
+ * such as `2023-05-01T12:34:56.789Z`). The date range is clamped to valid
+ * millisecond values so `toISOString()` never throws on an invalid date.
+ */
+export const arbCreatedAt: fc.Arbitrary<string> = fc
+  .date({
+    min: new Date("1970-01-01T00:00:00.000Z"),
+    max: new Date("2100-12-31T23:59:59.999Z"),
+    noInvalidDate: true,
+  })
+  .map((d) => d.toISOString());
 
 /** A single valid card: `{ id: non-empty string }`. */
 export const arbCard: fc.Arbitrary<Card> = fc.record({ id: arbId });
@@ -56,9 +71,10 @@ export const arbDeck: fc.Arbitrary<Deck> = fc
     name: arbDeckName,
     description: arbDescription,
     cards: arbCards,
+    createdAt: arbCreatedAt,
   })
-  .map(({ id, name, description, cards }) => {
-    const deck: Deck = { id, name, cards };
+  .map(({ id, name, description, cards, createdAt }) => {
+    const deck: Deck = { id, name, cards, createdAt };
     if (description !== undefined) {
       deck.description = description;
     }
@@ -77,9 +93,10 @@ export const arbDeckList: fc.Arbitrary<Deck[]> = fc.array(arbDeck, {
  *
  * Generating tens of thousands of fully-random decks per run would make the
  * property suite slow, so this keeps each deck minimal (a bare id, a
- * single-character name, no description, no cards) while still driving the
- * list length up to and including 10,000. This validates that a maximal deck
- * list survives a save/load round-trip without truncation or reordering.
+ * single-character name, no description, no cards, a fixed valid `createdAt`)
+ * while still driving the list length up to and including 10,000. This
+ * validates that a maximal deck list survives a save/load round-trip without
+ * truncation or reordering.
  */
 export const arbLargeDeckList: fc.Arbitrary<Deck[]> = fc
   .integer({ min: 9_990, max: 10_000 })
@@ -88,8 +105,93 @@ export const arbLargeDeckList: fc.Arbitrary<Deck[]> = fc
       id: `deck-${index}`,
       name: "x",
       cards: [],
+      createdAt: "2024-01-01T00:00:00.000Z",
     })),
   );
+
+/**
+ * A valid `DeckFormInput`: a name of 1-100 characters and an optional
+ * description of at most 500 characters. Used by the store validation and
+ * create/update property tests (Property 1, Property 2, Property 5).
+ *
+ * The generated name is guaranteed to be non-empty *after* trimming so it
+ * satisfies `deckFormSchema` (which trims then requires min length 1). We build
+ * it from a bounded core plus a padding character so the trimmed length stays
+ * within 1-100.
+ */
+export const arbDeckFormInput: fc.Arbitrary<DeckFormInput> = fc
+  .record({
+    name: fc
+      .string({ minLength: 1, maxLength: 100 })
+      // Ensure at least one non-whitespace char so the trimmed name is valid.
+      .filter((s) => s.trim().length >= 1 && s.trim().length <= 100),
+    description: fc.option(fc.string({ maxLength: 500 }), { nil: undefined }),
+  })
+  .map(({ name, description }) => {
+    const input: DeckFormInput = { name };
+    if (description !== undefined) {
+      input.description = description;
+    }
+    return input;
+  });
+
+/**
+ * An invalid name that is empty or whitespace-only. After trimming these
+ * collapse to the empty string, so `deckFormSchema` rejects them with the
+ * "Name is required" message (Requirements 1.8, 2.9, 4.3).
+ */
+export const arbWhitespaceName: fc.Arbitrary<string> = fc.oneof(
+  fc.constant(""),
+  // Whitespace-only strings (spaces, tabs, newlines) of length 1-20.
+  fc
+    .array(fc.constantFrom(" ", "\t", "\n", "\r", "\f", "\v"), {
+      minLength: 1,
+      maxLength: 20,
+    })
+    .map((chars) => chars.join("")),
+);
+
+/**
+ * An invalid name that exceeds 100 characters (after trimming). Built from a
+ * non-whitespace base so the failure is the length bound, not the trim/min
+ * rule (Requirements 4.4).
+ */
+export const arbOverlongName: fc.Arbitrary<string> = fc
+  .integer({ min: 101, max: 300 })
+  .map((length) => "a".repeat(length));
+
+/**
+ * An invalid description that exceeds 500 characters, triggering the
+ * "Description exceeds 500 characters" rejection (Requirements 4.5).
+ */
+export const arbOverlongDescription: fc.Arbitrary<string> = fc
+  .integer({ min: 501, max: 800 })
+  .map((length) => "a".repeat(length));
+
+/**
+ * An invalid `createdAt` for Property 6's rejection branch: empty,
+ * whitespace-only, or a non-ISO string that `Date.parse` cannot parse
+ * (Requirements 6.2, 6.3). Values that could incidentally parse as a date are
+ * filtered out so every sample is genuinely rejected by the schema.
+ */
+export const arbInvalidCreatedAt: fc.Arbitrary<string> = fc
+  .oneof(
+    fc.constant(""),
+    fc
+      .array(fc.constantFrom(" ", "\t", "\n"), { minLength: 1, maxLength: 10 })
+      .map((chars) => chars.join("")),
+    fc.string({ maxLength: 30 }),
+  )
+  .filter((s) => Number.isNaN(Date.parse(s)));
+
+/**
+ * An invalid deck id for Property 6's rejection branch: empty or longer than
+ * the 100-character bound (Requirements 6.5, 6.6).
+ */
+export const arbInvalidId: fc.Arbitrary<string> = fc.oneof(
+  fc.constant(""),
+  fc.integer({ min: 101, max: 300 }).map((length) => "a".repeat(length)),
+);
 
 /**
  * A pathname arbitrary for the active-navigation property (Property 13).

@@ -35,6 +35,8 @@ function makeStore(
     status,
     error,
     addDeck: vi.fn(),
+    updateDeck: vi.fn(),
+    deleteDeck: vi.fn(),
   };
 }
 
@@ -146,7 +148,7 @@ describe("EmptyState entry points", () => {
   // rendered directly (it does not depend on the store).
   it("shows both create and import entry points when EmptyState is rendered directly", () => {
     cleanup();
-    render(<EmptyState />);
+    render(<EmptyState onCreate={vi.fn()} />);
 
     expect(
       screen.getByRole("button", { name: /create deck/i }),
