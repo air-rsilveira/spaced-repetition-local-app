@@ -15,7 +15,12 @@ import { usePathname } from "next/navigation";
 const mockUsePathname = vi.mocked(usePathname);
 
 describe("active navigation destination", () => {
-  // Feature: walking-skeleton, Property 13: Active navigation destination reflects the current route
+  // Feature: polish-responsiveness-e2e-wiring, Property 2
+  // **Validates: Requirements 1.2**
+  // Navigation active state tracks the current path — for all pathnames, a
+  // destination carries `aria-current="page"` plus the persistent non-color
+  // indicator (bold weight + bottom border) iff its `href` equals the current
+  // pathname; when none match, none is active.
   it("marks a destination active iff its href matches the pathname, none active otherwise", () => {
     fc.assert(
       fc.property(arbPathname, (pathname) => {

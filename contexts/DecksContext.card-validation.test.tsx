@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
 import fc from "fast-check";
-import { renderHook } from "@testing-library/react";
+import { renderHook, act } from "@testing-library/react";
 import type { ReactNode } from "react";
 
-import { DecksProvider, useDecks } from "@/contexts/DecksContext";
+import { DecksProvider, useDecks, type AddCardResult, type UpdateCardResult } from "@/contexts/DecksContext";
 import { arbDeck, arbEmptyOrWhitespace, arbOverlongText } from "@/test/arbitraries";
 
 /**
@@ -46,13 +46,17 @@ describe("DecksContext card validation rejection", () => {
 
           const { result } = renderHook(() => useDecks(), { wrapper });
 
-          const addResult = result.current.addCard({
-            deckId: targetDeck.id,
-            front: frontInput,
-            back: backInput,
+          let addResult: AddCardResult | undefined;
+          act(() => {
+            addResult = result.current.addCard({
+              deckId: targetDeck.id,
+              front: frontInput,
+              back: backInput,
+            });
           });
 
           // Should be rejected
+          if (!addResult) return;
           expect(addResult.ok).toBe(false);
           if (!addResult.ok) {
             expect(addResult.error.code).toBe("validation");
@@ -124,14 +128,18 @@ describe("DecksContext card validation rejection", () => {
 
           const { result } = renderHook(() => useDecks(), { wrapper });
 
-          const updateResult = result.current.updateCard({
-            deckId: targetDeck.id,
-            cardId: targetCard.id,
-            front: frontInput,
-            back: backInput,
+          let updateResult: UpdateCardResult | undefined;
+          act(() => {
+            updateResult = result.current.updateCard({
+              deckId: targetDeck.id,
+              cardId: targetCard.id,
+              front: frontInput,
+              back: backInput,
+            });
           });
 
           // Should be rejected
+          if (!updateResult) return;
           expect(updateResult.ok).toBe(false);
           if (!updateResult.ok) {
             expect(updateResult.error.code).toBe("validation");

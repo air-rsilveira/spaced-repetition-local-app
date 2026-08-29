@@ -74,6 +74,10 @@ export type UpdateDeckResult =
   | { ok: true; deck: Deck }
   | { ok: false; error: DecksError };
 
+export type ReplaceDeckResult =
+  | { ok: true; deck: Deck }
+  | { ok: false; error: DecksError };
+
 export type DeleteDeckResult =
   | { ok: true; id: string }
   | { ok: false; error: DecksError };
@@ -112,6 +116,7 @@ export interface DecksContextValue {
   error: DecksError | null;
   addDeck: (input: AddDeckInput) => AddDeckResult;
   updateDeck: (input: UpdateDeckInput) => UpdateDeckResult;
+  replaceDeck: (deck: Deck) => ReplaceDeckResult;
   deleteDeck: (id: string) => DeleteDeckResult;
   addCard: (input: AddCardInput) => AddCardResult;
   updateCard: (input: UpdateCardInput) => UpdateCardResult;
@@ -289,6 +294,35 @@ export function DecksProvider({ children, initialDecks }: DecksProviderProps) {
         prev.map((deck) => (deck.id === input.id ? updated : deck)),
       );
       return { ok: true, deck: updated };
+    },
+    [decks],
+  );
+
+  /**
+   * Replace an existing deck by id with a new deck object.
+   * Used by ImportControl for duplicate resolution (Requirement 5.2).
+   * Replaces in-place via immutable update pattern and persists to Storage_Seam.
+   *
+   * @param deck The new deck object (must have an id matching an existing deck)
+   * @returns `{ ok: true, deck }` if the deck was replaced, or `{ ok: false, error }` if not found
+   */
+  const replaceDeck = useCallback(
+    (deck: Deck): ReplaceDeckResult => {
+      const index = decks.findIndex((d) => d.id === deck.id);
+      if (index === -1) {
+        const error: DecksError = {
+          code: "not-found",
+          message: `No deck with id "${deck.id}".`,
+        };
+        setError(error);
+        return { ok: false, error };
+      }
+
+      setError(null);
+      setDecks((prev) =>
+        prev.map((d) => (d.id === deck.id ? deck : d)),
+      );
+      return { ok: true, deck };
     },
     [decks],
   );
@@ -548,6 +582,7 @@ export function DecksProvider({ children, initialDecks }: DecksProviderProps) {
     error,
     addDeck,
     updateDeck,
+    replaceDeck,
     deleteDeck,
     addCard,
     updateCard,

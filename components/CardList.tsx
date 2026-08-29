@@ -25,7 +25,7 @@ export default function CardList({
     return (
       <section
         aria-labelledby="empty-cards-heading"
-        className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center"
+        className="flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8 text-center"
       >
         <div className="w-full max-w-md rounded-lg border border-aws-gray-200 bg-aws-white p-8 shadow-sm sm:p-12">
           <h2
@@ -43,18 +43,20 @@ export default function CardList({
   }
 
   return (
-    <section className="px-6 py-8">
-      <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {cards.map((card) => (
-          <li key={card.id} className="flex flex-col gap-3">
-            <CardItem
-              card={card}
-              onEdit={onEdit}
-              onDelete={onDelete}
-            />
-          </li>
-        ))}
-      </ul>
+    <section className="px-4 py-8 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl">
+        <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          {cards.map((card) => (
+            <li key={card.id} className="flex flex-col gap-3">
+              <CardItem
+                card={card}
+                onEdit={onEdit}
+                onDelete={onDelete}
+              />
+            </li>
+          ))}
+        </ul>
+      </div>
     </section>
   );
 }

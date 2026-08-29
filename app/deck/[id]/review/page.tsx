@@ -1,11 +1,14 @@
 "use client";
 
-import { use, useState } from "react";
-import Link from "next/link";
+import { use, useState, useEffect } from "react";
 import { useDecks } from "@/contexts/DecksContext";
 import { getDueCards } from "@/lib/leitner";
 import type { Card } from "@/types";
 import Markdown from "@/components/Markdown";
+import ExportControl from "@/components/ExportControl";
+import LoadingState from "@/components/LoadingState";
+import ErrorState from "@/components/ErrorState";
+import BackLink from "@/components/BackLink";
 
 interface ReviewPageParams {
   id: string;
@@ -27,12 +30,20 @@ interface ReviewState {
  * route id via `use(params)`. It displays the deck name in the header and
  * manages the review session state including card display, grading, and completion.
  *
+ * Hydration Guard (Requirements 8.1, 8.2, 8.3):
+ * - During initial render (before mount): renders LoadingState with deterministic
+ *   empty seed, matching server output exactly
+ * - After mount completes: useEffect initializes reviewState based on actual deck data
+ * - This ensures server/client markup match and no hydration warning is emitted
+ *
  * Render logic:
- * - `status !== "ready"`: render a loading state (the store is still hydrating).
- * - `status === "ready"` and a deck matches the route id: render the deck name
- *   and review session content.
- * - `status === "ready"` and no deck matches: render a deck-missing state.
- * - When all cards reviewed: render completion summary (Requirement 8.2)
+ * - `status !== "ready"`: render LoadingState (store is hydrating or errored)
+ * - `status === "ready"` and reviewState === null: (transitional, after useEffect runs)
+ * - `status === "ready"` and deck matches route id:
+ *   - If reviewState.cards.length === 0: render "No cards due" empty state
+ *   - If reviewState.completed: render completion summary
+ *   - Otherwise: render active review session
+ * - `status === "ready"` and no deck matches: render deck-not-found error state
  *
  * Requirements: 1.1, 1.2, 1.3, 2, 3, 4, 5, 6, 7, 8
  */
@@ -44,28 +55,19 @@ export default function ReviewPage({
   const { id } = use(params);
   const { decks, status, gradeCardCorrect, gradeCardIncorrect } = useDecks();
 
-  // Initialize review state
   const [reviewState, setReviewState] = useState<ReviewState | null>(null);
+  const [gradeError, setGradeError] = useState<string | null>(null);
 
-  // Initialize review session when deck loads
-  if (status === "ready" && reviewState === null && decks.length > 0) {
-    const deck = decks.find((d) => d.id === id);
-    if (deck) {
-      const today = new Date();
-      const dueCards = getDueCards(deck, today);
+  // Mount-gated effect to initialize review session (Requirements 8.1, 8.2, 8.3)
+  // This runs AFTER the first render, so no state is written during render-time
+  useEffect(() => {
+    if (status === "ready" && reviewState === null && decks.length > 0) {
+      const deck = decks.find((d) => d.id === id);
+      if (deck) {
+        const today = new Date();
+        const dueCards = getDueCards(deck, today);
 
-      if (dueCards.length === 0) {
-        // No cards due — show "No cards due" message
-        setReviewState({
-          currentCardIndex: 0,
-          cards: [],
-          revealed: false,
-          completed: false,
-          correctCount: 0,
-          incorrectCount: 0,
-        });
-      } else {
-        // Initialize with first due card
+        // eslint-disable-next-line react-hooks/set-state-in-effect -- post-mount initialization
         setReviewState({
           currentCardIndex: 0,
           cards: dueCards,
@@ -76,60 +78,49 @@ export default function ReviewPage({
         });
       }
     }
-  }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- reviewState excluded to prevent re-initialization
+  }, [status, decks, id]);
 
-  // Loading state — store is still hydrating (Requirement 1.2 via 1.5 pattern)
+  // Loading state — store is still hydrating (Requirement 2.3, 8.2)
   if (status !== "ready") {
-    return (
-      <section className="flex flex-1 flex-col items-center justify-center px-6 py-16">
-        <div className="text-center">
-          <h2 className="text-lg font-semibold text-aws-gray-900">Loading deck...</h2>
-        </div>
-      </section>
-    );
+    return <LoadingState label="Loading review session..." />;
   }
 
   const deck = decks.find((d) => d.id === id);
 
-  // Deck not found — render missing state (Requirement 1.2)
+  // Deck not found — render error state with back action (Requirement 4.3, 1.9)
   if (!deck) {
     return (
-      <section className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
-        <div
-          role="alert"
-          className="w-full max-w-md rounded-lg border border-aws-error bg-aws-white p-8 shadow-sm"
-        >
-          <h2 className="text-lg font-semibold text-aws-gray-900">
-            Deck not found
-          </h2>
-          <p className="mt-2 text-sm text-aws-gray-600">
-            The deck you&apos;re looking for doesn&apos;t exist or has been deleted.
-          </p>
-        </div>
-      </section>
+      <ErrorState
+        title="Deck not found"
+        message="The deck you're looking for doesn't exist or has been deleted."
+        action={<BackLink href="/">Back to Dashboard</BackLink>}
+      />
     );
   }
 
   const today = new Date();
 
-  // No cards due state (Requirement 2.3)
+  // No cards due state (Requirement 3.3)
   if (reviewState && reviewState.cards.length === 0) {
     return (
       <>
-        <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-6 py-6 sm:py-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
-                {deck.name}
-              </h1>
-              {deck.description && (
-                <p className="mt-1 text-sm text-aws-gray-200">{deck.description}</p>
-              )}
+        <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-4 py-6 sm:px-6 lg:px-8 sm:py-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
+                  {deck.name}
+                </h1>
+                {deck.description && (
+                  <p className="mt-1 text-sm text-aws-gray-200">{deck.description}</p>
+                )}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="flex flex-1 flex-col items-center justify-center px-6 py-16">
+        <section className="flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
           <div className="w-full max-w-md text-center">
             <div className="mb-4 text-5xl">🎉</div>
             <h2 className="text-lg font-semibold text-aws-gray-900">
@@ -138,40 +129,39 @@ export default function ReviewPage({
             <p className="mt-2 text-sm text-aws-gray-600">
               Great job staying on top of your studies! Come back later for more cards.
             </p>
-            <Link
-              href={`/deck/${id}`}
-              className="mt-6 inline-block rounded-md bg-aws-blue px-4 py-2 text-sm font-medium text-aws-white hover:bg-aws-blue-dark transition-colors"
-            >
-              Back to deck
-            </Link>
+            <div className="mt-6">
+              <BackLink href={`/deck/${id}`}>Back to deck</BackLink>
+            </div>
           </div>
         </section>
       </>
     );
   }
 
-  // Completion summary (Requirement 8.2)
+  // Completion summary (Requirement 5.1, 5.2, 5.3, 1.6)
   if (reviewState && reviewState.completed) {
     const totalReviewed = reviewState.correctCount + reviewState.incorrectCount;
+    const showExportReminder = totalReviewed > 0;
 
     return (
       <>
-        <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-6 py-6 sm:py-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div>
-              <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
-                {deck.name}
-              </h1>
-              {deck.description && (
-                <p className="mt-1 text-sm text-aws-gray-200">{deck.description}</p>
-              )}
+        <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-4 py-6 sm:px-6 lg:px-8 sm:py-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
+                  {deck.name}
+                </h1>
+                {deck.description && (
+                  <p className="mt-1 text-sm text-aws-gray-200">{deck.description}</p>
+                )}
+              </div>
             </div>
           </div>
         </section>
 
-        <section className="flex flex-1 flex-col items-center justify-center px-6 py-16">
-          <div className="w-full max-w-md rounded-lg bg-aws-white p-8 shadow-sm">
-            {/* Congratulatory message */}
+        <section className="flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
+          <div className="w-full max-w-md rounded-lg bg-aws-white p-8 shadow-sm sm:p-12">
             <div className="mb-6 text-center">
               <div className="mb-4 text-6xl">🎉</div>
               <h2 className="text-2xl font-bold text-aws-success">Review complete!</h2>
@@ -180,7 +170,6 @@ export default function ReviewPage({
               </p>
             </div>
 
-            {/* Summary stats */}
             <div className="mb-6 space-y-4 rounded-lg bg-aws-gray-100 p-4">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-medium text-aws-gray-900">
@@ -208,20 +197,22 @@ export default function ReviewPage({
               </div>
             </div>
 
-            {/* Navigation options */}
-            <div className="space-y-3">
-              <Link
-                href={`/deck/${id}`}
-                className="block w-full rounded-md bg-aws-blue px-4 py-2 text-center text-sm font-medium text-aws-white hover:bg-aws-blue-dark transition-colors"
-              >
+            {showExportReminder && (
+              <div className="mb-6 rounded-lg bg-aws-gray-100 p-4">
+                <p className="mb-3 text-sm font-medium text-aws-gray-900">
+                  Save your progress:
+                </p>
+                <ExportControl deck={deck} />
+              </div>
+            )}
+
+            <div className="space-y-3 flex flex-col">
+              <BackLink href={`/deck/${id}`} variant="secondary">
                 Back to deck
-              </Link>
-              <Link
-                href="/"
-                className="block w-full rounded-md bg-aws-orange px-4 py-2 text-center text-sm font-medium text-aws-squid-ink hover:bg-aws-orange-dark transition-colors"
-              >
-                Review more decks
-              </Link>
+              </BackLink>
+              <BackLink href="/" variant="primary">
+                Back to Dashboard
+              </BackLink>
             </div>
           </div>
         </section>
@@ -240,6 +231,8 @@ export default function ReviewPage({
       const result = gradeCardCorrect(id, currentCard.id, today);
 
       if (result.ok) {
+        // Clear any previous error
+        setGradeError(null);
         // Move to next card or mark as completed
         if (reviewState.currentCardIndex < reviewState.cards.length - 1) {
           setReviewState({
@@ -256,9 +249,9 @@ export default function ReviewPage({
           });
         }
       } else {
-        // Handle error (Requirement 7.3)
-        console.error("Failed to grade card:", result.error);
-        alert("Failed to save your progress. Please try again.");
+        // Handle error (Requirement 4.4): set gradeError and render in-view ErrorState
+        // Do NOT advance currentCardIndex or change counts
+        setGradeError("Failed to save your progress. Please try again.");
       }
     };
 
@@ -267,6 +260,8 @@ export default function ReviewPage({
       const result = gradeCardIncorrect(id, currentCard.id, today);
 
       if (result.ok) {
+        // Clear any previous error
+        setGradeError(null);
         // Move to next card or mark as completed
         if (reviewState.currentCardIndex < reviewState.cards.length - 1) {
           setReviewState({
@@ -283,42 +278,51 @@ export default function ReviewPage({
           });
         }
       } else {
-        // Handle error (Requirement 7.3)
-        console.error("Failed to grade card:", result.error);
-        alert("Failed to save your progress. Please try again.");
+        // Handle error (Requirement 4.4): set gradeError and render in-view ErrorState
+        // Do NOT advance currentCardIndex or change counts
+        setGradeError("Failed to save your progress. Please try again.");
       }
     };
 
     return (
       <>
-        <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-6 py-6 sm:py-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex-1">
-              <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
-                {deck.name}
-              </h1>
-              {deck.description && (
-                <p className="mt-1 text-sm text-aws-gray-200">{deck.description}</p>
-              )}
-            </div>
-            {/* Progress indicator (Requirement 8.1) */}
-            <div className="text-right">
-              <div className="text-sm font-medium text-aws-gray-200">
-                {progress} of {total}
+        <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-4 py-6 sm:px-6 lg:px-8 sm:py-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <div className="flex-1">
+                <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
+                  {deck.name}
+                </h1>
+                {deck.description && (
+                  <p className="mt-1 text-sm text-aws-gray-200">{deck.description}</p>
+                )}
               </div>
-              <div className="mt-1 h-2 w-32 overflow-hidden rounded-full bg-aws-gray-600">
-                <div
-                  className="h-full bg-aws-orange transition-all duration-300"
-                  style={{ width: `${(progress / total) * 100}%` }}
-                />
+              <div className="text-right">
+                <div className="text-sm font-medium text-aws-gray-200">
+                  {progress} of {total}
+                </div>
+                <div className="mt-1 h-2 w-32 overflow-hidden rounded-full bg-aws-gray-600">
+                  <div
+                    className="h-full bg-aws-orange transition-all duration-300"
+                    style={{ width: `${(progress / total) * 100}%` }}
+                  />
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="flex flex-1 flex-col items-center justify-center px-6 py-16">
+        <section className="flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
           <div className="w-full max-w-md">
-            {/* Card display (Requirements 3.1-3.4) */}
+            {gradeError && (
+              <div className="mb-6">
+                <ErrorState
+                  title="Failed to save"
+                  message={gradeError}
+                />
+              </div>
+            )}
+
             <div className="mb-8">
               <button
                 onClick={() => setReviewState({ ...reviewState, revealed: !reviewState.revealed })}
@@ -355,7 +359,6 @@ export default function ReviewPage({
               </button>
             </div>
 
-            {/* Grading buttons (Requirements 4.1-4.4) */}
             {reviewState.revealed && (
               <div className="flex gap-4">
                 <button
@@ -378,27 +381,5 @@ export default function ReviewPage({
     );
   }
 
-  // Fallback state (should not normally reach here)
-  return (
-    <>
-      <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-6 py-6 sm:py-8">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
-              {deck.name}
-            </h1>
-            {deck.description && (
-              <p className="mt-1 text-sm text-aws-gray-200">{deck.description}</p>
-            )}
-          </div>
-        </div>
-      </section>
-
-      <section className="flex flex-1 flex-col items-center justify-center px-6 py-16">
-        <div className="text-center">
-          <h2 className="text-lg font-semibold text-aws-gray-900">Loading review session...</h2>
-        </div>
-      </section>
-    </>
-  );
+  return <LoadingState label="Loading review session..." />;
 }

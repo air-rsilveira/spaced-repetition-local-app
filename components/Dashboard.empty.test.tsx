@@ -29,6 +29,7 @@ describe("Dashboard empty state", () => {
       error: null,
       addDeck: vi.fn(),
       updateDeck: vi.fn(),
+      replaceDeck: vi.fn(),
       deleteDeck: vi.fn(),
       addCard: vi.fn(),
       updateCard: vi.fn(),
@@ -39,17 +40,24 @@ describe("Dashboard empty state", () => {
 
     const { container } = render(<Dashboard />);
 
-    // The EmptyState is present: its "no decks" heading and both entry-point
-    // buttons render (create-deck / import-deck).
+    // The EmptyState is present: its "no decks" heading and the "Create deck"
+    // button render (Requirements 3.1, 9.4).
     expect(
       screen.getByRole("heading", { name: /no decks yet/i }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /create deck/i }),
     ).toBeInTheDocument();
+
+    // The dead "Import deck" stub button from EmptyState is gone; import is
+    // available via the ImportControl in the Dashboard header (Requirement 3.1, 9.4).
     expect(
-      screen.getByRole("button", { name: /import deck/i }),
-    ).toBeInTheDocument();
+      screen.queryAllByRole("button", { name: /import deck/i }).filter(
+        (btn) =>
+          btn.closest("section") &&
+          btn.closest("section")?.querySelector("#empty-state-heading"),
+      ),
+    ).toHaveLength(0);
 
     // No DeckCard renders. DeckCard uses <article> with an <h3> deck name, so
     // the absence of both confirms no deck was listed.

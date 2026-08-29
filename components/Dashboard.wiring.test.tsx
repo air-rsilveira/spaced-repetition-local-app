@@ -52,7 +52,7 @@ describe("Dashboard wiring — create entry points open the form (1.1)", () => {
     seedDecks(singleDeckList);
     renderDashboard();
 
-    // Wait for hydration to swap in the listing.
+    // Wait for hydration to swap in the listing (loading phase completes).
     const newDeckButton = await screen.findByRole("button", {
       name: /new deck/i,
     });
@@ -71,10 +71,10 @@ describe("Dashboard wiring — create entry points open the form (1.1)", () => {
   });
 
   it("opens the DeckForm in create mode from the EmptyState 'Create deck' button", async () => {
-    // Empty store (cleared localStorage) so the EmptyState renders.
+    // Empty store (cleared localStorage) so the EmptyState renders after hydration.
     renderDashboard();
 
-    // The empty state is shown once the store is ready.
+    // The empty state is shown once the store transitions from "initial" to ready.
     const createButton = await screen.findByRole("button", {
       name: /create deck/i,
     });

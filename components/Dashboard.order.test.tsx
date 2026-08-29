@@ -54,10 +54,12 @@ describe("Dashboard deck listing order", () => {
           const cards = container.querySelectorAll("article");
           expect(cards).toHaveLength(decks.length);
 
-          // The deck name is rendered in an <h3> inside each DeckCard. The order
-          // of rendered names must match the store's order exactly.
+          // The deck name is rendered in an <h3> inside each <article> (DeckCard).
+          // The order of rendered names must match the store's order exactly.
+          // We query for h3s within articles specifically to exclude any h3s in
+          // other parts of the layout (e.g., the "Import a deck" header).
           const renderedNames = Array.from(
-            container.querySelectorAll("h3"),
+            container.querySelectorAll("article h3"),
           ).map((heading) => heading.textContent);
           const expectedNames = decks.map((deck) => deck.name);
           expect(renderedNames).toEqual(expectedNames);

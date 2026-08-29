@@ -6,7 +6,7 @@
       "trigger": "Stop",
       "action": {
         "type": "command",
-        "command": "kirograph sync --quiet 2>&1 > /dev/null"
+        "command": "kirograph sync --quiet > $null 2>&1"
       }
     }
   ]

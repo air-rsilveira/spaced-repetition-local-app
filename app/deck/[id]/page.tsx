@@ -1,11 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { use, useState } from "react";
 import { useDecks } from "@/contexts/DecksContext";
+import { resolvePhase } from "@/contexts/useStorePhase";
 import type { Card } from "@/types";
-import CardList from "@/components/CardList";
+import CardItem from "@/components/CardItem";
 import CardForm from "@/components/CardForm";
 import DeleteConfirm from "@/components/DeleteConfirm";
+import ExportControl from "@/components/ExportControl";
+import LoadingState from "@/components/LoadingState";
+import ErrorState from "@/components/ErrorState";
+import BackLink from "@/components/BackLink";
 
 type CardOverlay =
   | { kind: "closed" }
@@ -22,19 +28,20 @@ interface DeckDetailPageParams {
  *
  * Client Component: it consumes the decks store via `useDecks()` and reads the
  * route id via `use(params)`. It holds the local `CardOverlay` UI state for
- * managing create/edit/delete flows and renders the deck's cards via `CardList`.
+ * managing create/edit/delete flows and renders the decks cards via `CardList`.
  *
- * Render logic:
- * - `status !== "ready"`: render a loading state (the store is still hydrating).
- * - `status === "ready"` and a deck matches the route id: render the deck name,
- *   an "Add card" button, and the `CardList`.
- * - `status === "ready"` and no deck matches: render a deck-missing state.
+ * Render logic uses `resolvePhase` to gate on a single status:
+ * - `loading`: store is still hydrating; render `LoadingState`
+ * - `error`: deck not found; render `ErrorState` with "Back to Dashboard" action
+ * - `empty`: deck found but has no cards; render empty state with "Add card" control
+ * - `content`: render the deck name, navigation controls (Back to Dashboard, Start review),
+ *   and `CardList`
  *
  * The overlay renders `CardForm` for create/edit and `DeleteConfirm` for
  * delete. Confirming delete calls `deleteCard(deck.id, card.id)` then closes
  * the overlay, while cancelling leaves the list unchanged.
  *
- * Requirements: 1.1, 1.2, 1.5, 1.6, 2.1, 3.1, 4.1, 4.2, 4.3, 4.7
+ * Requirements: 1.3, 1.4, 1.9, 2.2, 2.5, 3.2, 4.2
  */
 export default function DeckDetailPage({
   params,
@@ -90,66 +97,126 @@ export default function DeckDetailPage({
     }
   };
 
-  // Loading state — store is still hydrating (Requirement 1.5)
-  if (status !== "ready") {
-    return (
-      <section className="flex flex-1 flex-col items-center justify-center px-6 py-16">
-        <div className="text-center">
-          <h2 className="text-lg font-semibold text-aws-gray-900">Loading deck...</h2>
-        </div>
-      </section>
-    );
-  }
-
+  // Resolve the deck and compute phase inputs
   const deck = decks.find((d) => d.id === id);
+  const hasError = status === "ready" && !deck;
+  const isEmpty = !!(status === "ready" && deck && deck.cards.length === 0);
+  const phase = resolvePhase({ status, hasError, isEmpty });
 
-  // Deck not found — render missing state (Requirement 1.6)
-  if (!deck) {
+  // Render based on phase (Requirements 2.2, 4.2)
+  if (phase === "loading") {
+    return <LoadingState label="Loading deck…" />;
+  }
+
+  if (phase === "error") {
     return (
-      <section className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
-        <div
-          role="alert"
-          className="w-full max-w-md rounded-lg border border-aws-error bg-aws-white p-8 shadow-sm"
-        >
-          <h2 className="text-lg font-semibold text-aws-gray-900">
-            Deck not found
-          </h2>
-          <p className="mt-2 text-sm text-aws-gray-600">
-            The deck you&apos;re looking for doesn&apos;t exist or has been deleted.
-          </p>
-        </div>
-      </section>
+      <ErrorState
+        title="Deck not found"
+        message="The deck was not found or has been deleted."
+        action={<BackLink href="/">Back to Dashboard</BackLink>}
+      />
     );
   }
 
-  // Deck found — render with CardList (Requirements 1.2, 1.3)
+  if (phase === "empty") {
+    return (
+      <>
+        <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-4 py-6 sm:px-6 lg:px-8 sm:py-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+              <div>
+                <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
+                  {deck!.name}
+                </h1>
+                {deck!.description && (
+                  <p className="mt-1 text-sm text-aws-gray-200">{deck!.description}</p>
+                )}
+              </div>
+              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3 sm:flex-shrink-0">
+                <BackLink href="/">Back to Dashboard</BackLink>
+                <ExportControl deck={deck!} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8">
+          <div className="w-full max-w-md rounded-lg border border-aws-gray-200 bg-aws-white p-8 shadow-sm sm:p-12">
+            <h2 className="text-2xl font-semibold tracking-tight text-aws-gray-900">
+              No cards yet
+            </h2>
+            <p className="mt-3 text-base leading-7 text-aws-gray-600">
+              Add cards to this deck to start studying.
+            </p>
+            <div className="mt-8">
+              <button
+                type="button"
+                onClick={openCreate}
+                className="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark"
+              >
+                Add card
+              </button>
+            </div>
+          </div>
+        </section>
+
+        {renderOverlay()}
+      </>
+    );
+  }
+
+  // phase === "content"
   return (
     <>
-      <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-6 py-6 sm:py-8">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <div>
-            <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
-              {deck.name}
-            </h1>
-            {deck.description && (
-              <p className="mt-1 text-sm text-aws-gray-200">{deck.description}</p>
-            )}
+      <section className="border-b border-aws-gray-200 bg-aws-squid-ink px-4 py-6 sm:px-6 lg:px-8 sm:py-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div>
+              <h1 className="text-2xl font-semibold tracking-tight text-aws-white sm:text-3xl">
+                {deck!.name}
+              </h1>
+              {deck!.description && (
+                <p className="mt-1 text-sm text-aws-gray-200">{deck!.description}</p>
+              )}
+            </div>
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-3 sm:flex-shrink-0">
+              <BackLink href="/">Back to Dashboard</BackLink>
+              <button
+                type="button"
+                onClick={openCreate}
+                className="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark"
+              >
+                Add card
+              </button>
+              <Link href={`/deck/${id}/review`}>
+                <button
+                  type="button"
+                  className="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark"
+                >
+                  Start review
+                </button>
+              </Link>
+              <ExportControl deck={deck!} />
+            </div>
           </div>
-          <button
-            type="button"
-            onClick={openCreate}
-            className="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark sm:flex-shrink-0"
-          >
-            Add card
-          </button>
         </div>
       </section>
 
-      <CardList
-        cards={deck.cards}
-        onEdit={openEdit}
-        onDelete={openDelete}
-      />
+      <section className="px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {deck!.cards.map((card) => (
+              <li key={card.id} className="flex flex-col gap-3">
+                <CardItem
+                  card={card}
+                  onEdit={() => openEdit(card)}
+                  onDelete={() => openDelete(card)}
+                />
+              </li>
+            ))}
+          </ul>
+        </div>
+      </section>
 
       {renderOverlay()}
     </>

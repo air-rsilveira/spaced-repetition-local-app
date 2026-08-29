@@ -36,6 +36,7 @@ function makeStore(
     error,
     addDeck: vi.fn(),
     updateDeck: vi.fn(),
+    replaceDeck: vi.fn(),
     deleteDeck: vi.fn(),
     addCard: vi.fn(),
     updateCard: vi.fn(),
@@ -79,8 +80,81 @@ describe("Dashboard state transitions and error indication", () => {
     expect(screen.getAllByRole("article")).toHaveLength(mockDeckList.length);
   });
 
+  // Requirement 2.1: during "initial" status, LoadingState renders instead of
+  // the deck listing or empty state.
+  it("renders LoadingState during initial phase instead of empty listing", () => {
+    mockedUseDecks.mockReturnValue(
+      makeStore(emptyDeckList, "initial"),
+    );
+    render(<Dashboard />);
+
+    // Loading indication is shown (via aria-live status region).
+    expect(screen.getByRole("status")).toBeInTheDocument();
+    expect(screen.getByText(/loading/i)).toBeInTheDocument();
+
+    // Neither empty state nor listing renders during loading phase.
+    expect(
+      screen.queryByRole("heading", { name: /no decks yet/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /^your decks$/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryAllByRole("article")).toHaveLength(0);
+  });
+
+  // Requirement 2.1, 2.4: loading phase transitions to ready with populated
+  // list (content phase).
+  it("transitions from LoadingState to deck listing when status becomes ready with decks", () => {
+    mockedUseDecks.mockReturnValue(
+      makeStore(emptyDeckList, "initial"),
+    );
+    const { rerender } = render(<Dashboard />);
+
+    // During initial, LoadingState renders.
+    expect(screen.getByRole("status")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /^your decks$/i }),
+    ).not.toBeInTheDocument();
+
+    // Transition to ready with populated decks.
+    mockedUseDecks.mockReturnValue(makeStore(mockDeckList, "ready"));
+    rerender(<Dashboard />);
+
+    // LoadingState is gone; listing is shown.
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /^your decks$/i }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByRole("article")).toHaveLength(mockDeckList.length);
+  });
+
+  // Requirement 2.1, 2.4: loading phase transitions to ready with empty list
+  // (empty phase).
+  it("transitions from LoadingState to EmptyState when status becomes ready with no decks", () => {
+    mockedUseDecks.mockReturnValue(
+      makeStore(emptyDeckList, "initial"),
+    );
+    const { rerender } = render(<Dashboard />);
+
+    // During initial, LoadingState renders.
+    expect(screen.getByRole("status")).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /no decks yet/i }),
+    ).not.toBeInTheDocument();
+
+    // Transition to ready with empty list.
+    mockedUseDecks.mockReturnValue(makeStore(emptyDeckList, "ready"));
+    rerender(<Dashboard />);
+
+    // LoadingState is gone; empty state is shown.
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /no decks yet/i }),
+    ).toBeInTheDocument();
+  });
+
   // Requirement 6.5: transitioning 1+ -> 0 decks swaps the deck listing for the
-  // empty state.
+  // empty state (when status is ready).
   it("replaces the deck listing with the empty state when decks go from 1+ to 0", () => {
     mockedUseDecks.mockReturnValue(makeStore(singleDeckList, "ready"));
     const { rerender } = render(<Dashboard />);
@@ -106,6 +180,62 @@ describe("Dashboard state transitions and error indication", () => {
       screen.queryByRole("heading", { name: /^your decks$/i }),
     ).not.toBeInTheDocument();
     expect(screen.queryAllByRole("article")).toHaveLength(0);
+  });
+
+  // Requirement 3.5, 4.1: error, empty, and content phases are mutually exclusive.
+  // When status is "error", neither listing nor empty state renders.
+  it("ensures error, empty, and content phases are mutually exclusive", () => {
+    const error: DecksError = {
+      code: "invalid-data",
+      message: "Stored deck data is invalid and could not be loaded.",
+    };
+
+    // Error phase: status is "error", with decks present in state to prove they
+    // are retained but not rendered.
+    mockedUseDecks.mockReturnValue(makeStore(mockDeckList, "error", error));
+    const { rerender } = render(<Dashboard />);
+
+    // Error state renders (via role="alert").
+    expect(screen.getByRole("alert")).toBeInTheDocument();
+    // Neither listing nor empty state.
+    expect(
+      screen.queryByRole("heading", { name: /^your decks$/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /no decks yet/i }),
+    ).not.toBeInTheDocument();
+    expect(screen.queryAllByRole("article")).toHaveLength(0);
+
+    // Transition from error to loading (initial status): only loading state.
+    mockedUseDecks.mockReturnValue(makeStore(emptyDeckList, "initial"));
+    rerender(<Dashboard />);
+
+    expect(screen.getByRole("status")).toBeInTheDocument();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { name: /no decks yet/i }),
+    ).not.toBeInTheDocument();
+
+    // Transition from loading to empty (ready + empty list): only empty state.
+    mockedUseDecks.mockReturnValue(makeStore(emptyDeckList, "ready"));
+    rerender(<Dashboard />);
+
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /no decks yet/i }),
+    ).toBeInTheDocument();
+
+    // Transition to content (ready + decks): only listing.
+    mockedUseDecks.mockReturnValue(makeStore(mockDeckList, "ready"));
+    rerender(<Dashboard />);
+
+    expect(screen.queryByRole("status")).not.toBeInTheDocument();
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { name: /^your decks$/i }),
+    ).toBeInTheDocument();
+    expect(screen.getAllByRole("article")).toHaveLength(mockDeckList.length);
   });
 
   // Requirement 6.6: an error status renders an error indication and neither
@@ -135,31 +265,24 @@ describe("Dashboard state transitions and error indication", () => {
 });
 
 describe("EmptyState entry points", () => {
-  // Requirements 6.2, 6.3: the empty state presents both a create-deck and an
-  // import-deck entry point.
-  it("shows both create and import entry points when the Dashboard renders with 0 decks", () => {
+  // Requirement 6.2: the empty state presents a create-deck entry point.
+  it("shows the create entry point when the Dashboard renders with 0 decks", () => {
     mockedUseDecks.mockReturnValue(makeStore(emptyDeckList, "ready"));
     render(<Dashboard />);
 
     expect(
       screen.getByRole("button", { name: /create deck/i }),
     ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /import deck/i }),
-    ).toBeInTheDocument();
   });
 
-  // Requirements 6.2, 6.3: the same entry points are present when EmptyState is
-  // rendered directly (it does not depend on the store).
-  it("shows both create and import entry points when EmptyState is rendered directly", () => {
+  // Requirement 6.2: the entry point is present when EmptyState is rendered
+  // directly (it does not depend on the store).
+  it("shows the create entry point when EmptyState is rendered directly", () => {
     cleanup();
     render(<EmptyState onCreate={vi.fn()} />);
 
     expect(
       screen.getByRole("button", { name: /create deck/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("button", { name: /import deck/i }),
     ).toBeInTheDocument();
   });
 });

@@ -4,11 +4,15 @@ import { useState } from "react";
 import Link from "next/link";
 
 import { useDecks } from "@/contexts/DecksContext";
+import { resolvePhase } from "@/contexts/useStorePhase";
 import DeckCard from "@/components/DeckCard";
 import DeckCardActions from "@/components/DeckCardActions";
 import DeckForm from "@/components/DeckForm";
 import DeleteConfirm from "@/components/DeleteConfirm";
 import EmptyState from "@/components/EmptyState";
+import ErrorState from "@/components/ErrorState";
+import LoadingState from "@/components/LoadingState";
+import ImportControl from "@/components/ImportControl";
 import { getDueCards } from "@/lib/leitner";
 import type { Deck } from "@/types";
 
@@ -30,21 +34,23 @@ type DashboardOverlay =
  *
  * Client Component: it consumes the decks store via `useDecks()` and holds the
  * local `DashboardOverlay` UI state. Rendering is driven by store state, so
- * transitions between the empty state and the listing happen automatically on
- * the next React render when the store updates.
+ * transitions between states happen automatically on the next React render when
+ * the store updates.
  *
- * Render logic:
- * - `status === "error"`: render an error indication and neither the listing
- *   nor the empty state; any previously loaded decks stay in the store.
- * - `decks.length === 0`: render the `EmptyState` in place of the listing,
- *   wired to open the create form (Requirement 1.1).
- * - otherwise: render exactly one `DeckCard` per deck, in store order, each
- *   paired with `DeckCardActions` to open the edit/delete overlays
- *   (Requirements 1.6, 2.6, 3.4).
+ * Render logic uses `resolvePhase()` to determine the current presentation phase:
+ * - `"loading"` (status === "initial"): render `LoadingState` with a loading indicator
+ * - `"error"` (status === "error" or hasError): render `ErrorState` with error message
+ * - `"empty"` (status === "ready" and decks.length === 0): render `EmptyState` in place
+ *   of the listing, wired to open the create form (Requirement 1.1)
+ * - `"content"` (status === "ready" with decks): render exactly one `DeckCard` per deck,
+ *   in store order, each paired with `DeckCardActions` to open the edit/delete overlays
+ *   (Requirements 1.6, 2.6, 3.4)
  *
- * The overlay renders `DeckForm` for create/edit and `DeleteConfirm` for
- * delete; confirming delete calls `deleteDeck(deck.id)` then closes, while
- * cancelling leaves the list unchanged (Requirements 1.1, 2.1, 3.1, 3.7).
+ * The overlay renders `DeckForm` for create/edit and `DeleteConfirm` for delete;
+ * confirming delete calls `deleteDeck(deck.id)` then closes, while cancelling leaves
+ * the list unchanged (Requirements 1.1, 2.1, 3.1, 3.7).
+ *
+ * Requirements: 2.1, 2.4, 3.5, 4.1
  */
 export default function Dashboard() {
   const { decks, status, error, deleteDeck } = useDecks();
@@ -88,67 +94,96 @@ export default function Dashboard() {
     }
   };
 
-  if (status === "error") {
+  const phase = resolvePhase({
+    status,
+    hasError: status === "error",
+    isEmpty: decks.length === 0,
+  });
+
+  // Render loading state
+  if (phase === "loading") {
+    return <LoadingState />;
+  }
+
+  // Render error state
+  if (phase === "error") {
     return (
-      <section className="flex flex-1 flex-col items-center justify-center px-6 py-16 text-center">
-        <div
-          role="alert"
-          className="w-full max-w-md rounded-lg border border-aws-error bg-aws-white p-8 shadow-sm"
-        >
-          <h2 className="text-lg font-semibold text-aws-gray-900">
-            Couldn&apos;t load your decks
-          </h2>
-          <p className="mt-2 text-sm text-aws-gray-600">
-            {error?.message ??
-              "Something went wrong while loading your decks. Please try again."}
-          </p>
-        </div>
-      </section>
+      <ErrorState
+        message={
+          error?.message ??
+          "Something went wrong while loading your decks. Please try again."
+        }
+      />
     );
   }
 
-  if (decks.length === 0) {
+  // Render empty state
+  if (phase === "empty") {
     return (
       <>
+        <section className="px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mx-auto max-w-7xl">
+            <div className="mb-8">
+              <h2 className="text-xl font-semibold tracking-tight text-aws-gray-900 mb-4">
+                Import a deck
+              </h2>
+              <div className="max-w-sm">
+                <ImportControl />
+              </div>
+            </div>
+          </div>
+        </section>
         <EmptyState onCreate={openCreate} />
         {renderOverlay()}
       </>
     );
   }
 
+  // Render content (listing view)
   return (
     <>
-      <section className="px-6 py-8">
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-          <h2 className="text-xl font-semibold tracking-tight text-aws-gray-900">
-            Your decks
-          </h2>
-          <button
-            type="button"
-            onClick={openCreate}
-            className="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark"
-          >
-            New deck
-          </button>
+      <section className="px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <div className="mb-8">
+            <h3 className="text-sm font-semibold tracking-tight text-aws-gray-600 mb-3">
+              Import a deck
+            </h3>
+            <div className="max-w-sm">
+              <ImportControl />
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            <h2 className="text-xl font-semibold tracking-tight text-aws-gray-900">
+              Your decks
+            </h2>
+            <button
+              type="button"
+              onClick={openCreate}
+              className="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark"
+            >
+              New deck
+            </button>
+          </div>
+          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            {decks.map((deck) => {
+              const today = new Date();
+              const dueCount = getDueCards(deck, today).length;
+              return (
+                <li key={deck.id} className="flex flex-col gap-3">
+                  <Link href={`/deck/${deck.id}`}>
+                    <DeckCard deck={deck} dueCount={dueCount} />
+                  </Link>
+                  <DeckCardActions
+                    deck={deck}
+                    onEdit={openEdit}
+                    onDelete={openDelete}
+                  />
+                </li>
+              );
+            })}
+          </ul>
         </div>
-        <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {decks.map((deck) => {
-            const today = new Date();
-            const dueCount = getDueCards(deck, today).length;
-            return (
-              <li key={deck.id} className="flex flex-col gap-3">
-                <Link href={`/deck/${deck.id}`}>
-                  <DeckCard deck={deck} dueCount={dueCount} />
-                </Link>
-                <DeckCardActions
-                  deck={deck}
-                  onEdit={openEdit}
-                  onDelete={openDelete}
-                />
-              </li>
-            );
-          })}
-        </ul>
       </section>
       {renderOverlay()}
     </>
