@@ -1,3 +1,8 @@
+---
+inclusion: fileMatch
+fileMatchPattern: '{app,components,contexts}/**/*.{tsx,ts,css}'
+---
+
 # Visual Identity
 
 This document defines the visual identity for the project. Apply these guidelines to all UI work.

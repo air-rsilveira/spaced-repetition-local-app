@@ -42,18 +42,17 @@ describe("CardList", () => {
     expect(screen.getByText("What is 2+2?")).toBeInTheDocument();
   });
 
-  it("shows empty-cards state for zero cards", () => {
-    // Requirement 1.7: CardList SHALL render an empty-cards state for zero cards
+  it("renders an empty grid with no items for zero cards", () => {
+    // The empty-cards message is owned by the deck page (paired with an
+    // "Add card" control); CardList itself renders no list items and no
+    // "No cards yet" message for an empty list.
     const onEdit = vi.fn();
     const onDelete = vi.fn();
 
     render(<CardList cards={[]} onEdit={onEdit} onDelete={onDelete} />);
 
-    // Should display the empty state message
-    expect(screen.getByText("No cards yet")).toBeInTheDocument();
-    expect(
-      screen.getByText(/This deck is empty/i),
-    ).toBeInTheDocument();
+    expect(screen.queryByText("No cards yet")).not.toBeInTheDocument();
+    expect(screen.queryAllByRole("listitem")).toHaveLength(0);
   });
 
   it("CardItem shows front text and Box N text label", () => {

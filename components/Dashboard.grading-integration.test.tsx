@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen } from "@testing-library/react";
 
 import Dashboard from "@/components/Dashboard";
+import { UIActionsProvider } from "@/contexts/UIActionsContext";
 import { getDueCards, promoteCard, resetCard } from "@/lib/leitner";
 import type { DeckList, Card } from "@/types";
 
@@ -114,7 +115,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(decks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Verify Dashboard renders
       expect(screen.getByRole("heading", { name: /Your decks/i })).toBeInTheDocument();
@@ -178,7 +179,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       expect(dueCards.map((c) => c.id)).not.toContain("box5-card");
 
       mockStore([deck]);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       const badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("2 due");
@@ -228,7 +229,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Initial state: 2 due cards
       const badgeInitial = screen.getByTestId("due-count-badge");
@@ -265,7 +266,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       // Update mock store and re-render
       mockStore(updatedDecks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Verify due count decreased by 1
       const badge = screen.getByTestId("due-count-badge");
@@ -307,7 +308,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Initial: 2 due cards
       let badge = screen.getByTestId("due-count-badge");
@@ -336,7 +337,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(updatedDecks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("1 due");
@@ -377,7 +378,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Initial: 2 due cards
       let badge = screen.getByTestId("due-count-badge");
@@ -406,7 +407,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(updatedDecks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("1 due");
@@ -459,7 +460,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Initial: 3 due cards
       let badge = screen.getByTestId("due-count-badge");
@@ -474,7 +475,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(updatedDecks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("2 due");
@@ -488,7 +489,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(updatedDecks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("1 due");
@@ -502,7 +503,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(updatedDecks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Final: No due cards badge should be hidden
       const finalBadges = screen.queryAllByTestId("due-count-badge");
@@ -551,7 +552,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Initial: Only card 2 is due (new card)
       const badge = screen.getByTestId("due-count-badge");
@@ -575,7 +576,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(updatedDecks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Final: No due cards
       const finalBadges = screen.queryAllByTestId("due-count-badge");
@@ -627,7 +628,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Initial: Deck A has 2 due, Deck B has 1 due
       const badges = screen.getAllByTestId("due-count-badge");
@@ -645,7 +646,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(updatedDecks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Updated: Deck A has 1 due, Deck B still has 1 due
       const newBadges = screen.getAllByTestId("due-count-badge");
@@ -693,7 +694,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      const { rerender } = render(<Dashboard />);
+      const { rerender } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Initial badge shows 2 due
       let badge = screen.getByTestId("due-count-badge");
@@ -737,7 +738,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      const { rerender } = render(<Dashboard />);
+      const { rerender } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Initial badge shows 1 due
       const badge = screen.getByTestId("due-count-badge");
@@ -777,7 +778,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
       ];
 
       mockStore(initialDecks);
-      const { rerender } = render(<Dashboard />);
+      const { rerender } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
       let badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("5 due");
@@ -850,7 +851,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       // First render with initial state
       mockStore(initialDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       let badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("2 due");
@@ -866,7 +867,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       // Clean up and render fresh Dashboard with persisted state
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Due count should reflect persisted state
       badge = screen.getByTestId("due-count-badge");
@@ -912,7 +913,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       // First mount
       mockStore(initialDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       const badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("3 due");
@@ -931,7 +932,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       // Re-mount with updated decks (simulating reload)
       mockStore(updatedDecks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // Due count should be 0 (all cards promoted)
       const badges = screen.queryAllByTestId("due-count-badge");
@@ -961,7 +962,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       // Cycle 1: Grade 1 card
       mockStore(decks);
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       let badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("4 due");
@@ -973,7 +974,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(decks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("3 due");
@@ -985,7 +986,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(decks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("2 due");
@@ -997,7 +998,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(decks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       badge = screen.getByTestId("due-count-badge");
       expect(badge.textContent).toBe("1 due");
@@ -1009,7 +1010,7 @@ describe("Dashboard due count updates after grading (Task 6.2, Requirements 7, 8
 
       mockStore(decks);
       cleanup();
-      render(<Dashboard />);
+      render(<Dashboard />, { wrapper: UIActionsProvider });
 
       // All done - badge should be hidden
       const badges = screen.queryAllByTestId("due-count-badge");

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 
 import { useDecks } from "@/contexts/DecksContext";
+import { useUIActions } from "@/contexts/UIActionsContext";
 import { resolvePhase } from "@/contexts/useStorePhase";
 import DeckCard from "@/components/DeckCard";
 import DeckCardActions from "@/components/DeckCardActions";
@@ -12,7 +13,9 @@ import DeleteConfirm from "@/components/DeleteConfirm";
 import EmptyState from "@/components/EmptyState";
 import ErrorState from "@/components/ErrorState";
 import LoadingState from "@/components/LoadingState";
-import ImportControl from "@/components/ImportControl";
+import ImportControl, {
+  type ImportControlHandle,
+} from "@/components/ImportControl";
 import { getDueCards } from "@/lib/leitner";
 import type { Deck } from "@/types";
 
@@ -54,9 +57,22 @@ type DashboardOverlay =
  */
 export default function Dashboard() {
   const { decks, status, error, deleteDeck } = useDecks();
+  const { registerLandingActions, clear } = useUIActions();
   const [overlay, setOverlay] = useState<DashboardOverlay>({ kind: "closed" });
+  const importControlRef = useRef<ImportControlHandle>(null);
 
   const openCreate = () => setOverlay({ kind: "create" });
+
+  // Register the landing-page actions so the contextual action bar can trigger
+  // them. "New deck" opens the create overlay this component owns; "Upload
+  // deck" opens the hidden import file picker. Cleared on unmount / route change.
+  useEffect(() => {
+    registerLandingActions({
+      onNewDeck: () => setOverlay({ kind: "create" }),
+      onUploadDeck: () => importControlRef.current?.openFilePicker(),
+    });
+    return () => clear();
+  }, [registerLandingActions, clear]);
   const openEdit = (deck: Deck) => setOverlay({ kind: "edit", deck });
   const openDelete = (deck: Deck) => setOverlay({ kind: "delete", deck });
   const closeOverlay = () => setOverlay({ kind: "closed" });
@@ -121,18 +137,10 @@ export default function Dashboard() {
   if (phase === "empty") {
     return (
       <>
-        <section className="px-4 py-8 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-7xl">
-            <div className="mb-8">
-              <h2 className="text-xl font-semibold tracking-tight text-aws-gray-900 mb-4">
-                Import a deck
-              </h2>
-              <div className="max-w-sm">
-                <ImportControl />
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* Import lives in the contextual action bar ("Upload deck"); the
+            control stays mounted (hidden) so its picker, errors, and duplicate
+            modal still work. */}
+        <ImportControl ref={importControlRef} />
         <EmptyState onCreate={openCreate} />
         {renderOverlay()}
       </>
@@ -142,30 +150,17 @@ export default function Dashboard() {
   // Render content (listing view)
   return (
     <>
+      {/* Import lives in the contextual action bar ("Upload deck"); the control
+          stays mounted (hidden) so its picker, errors, and duplicate modal work. */}
+      <ImportControl ref={importControlRef} />
       <section className="px-4 py-8 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-8">
-            <h3 className="text-sm font-semibold tracking-tight text-aws-gray-600 mb-3">
-              Import a deck
-            </h3>
-            <div className="max-w-sm">
-              <ImportControl />
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <h2 className="text-xl font-semibold tracking-tight text-aws-gray-900">
-              Your decks
-            </h2>
-            <button
-              type="button"
-              onClick={openCreate}
-              className="inline-flex h-11 items-center justify-center rounded-md bg-aws-orange px-6 text-sm font-semibold text-aws-squid-ink transition-colors hover:bg-aws-orange-dark"
-            >
-              New deck
-            </button>
-          </div>
-          <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="text-xl font-semibold tracking-tight text-aws-gray-900">
+            Your decks
+          </h2>
+          {/* A single centered column: each deck card spans the full width,
+              stacked one below the other. */}
+          <ul className="mt-6 flex flex-col gap-4">
             {decks.map((deck) => {
               const today = new Date();
               const dueCount = getDueCards(deck, today).length;

@@ -3,8 +3,10 @@ import { render, screen, within } from "@testing-library/react";
 import type { ReactNode } from "react";
 
 import AppHeader from "@/components/AppHeader";
+import ContextualActionBar from "@/components/ContextualActionBar";
 import { NAV_ITEMS } from "@/components/NavLinks";
 import { DecksProvider } from "@/contexts/DecksContext";
+import { UIActionsProvider } from "@/contexts/UIActionsContext";
 
 /**
  * Integration example test for the app shell (Requirements 1.1, 1.4, 1.9).
@@ -24,12 +26,13 @@ vi.mock("next/navigation", () => ({
 /** Mirrors the shell composition in `app/layout.tsx`. */
 function AppShell({ children }: { children: ReactNode }) {
   return (
-    <>
+    <UIActionsProvider>
       <AppHeader />
+      <ContextualActionBar />
       <DecksProvider>
         <main className="flex flex-1 flex-col">{children}</main>
       </DecksProvider>
-    </>
+    </UIActionsProvider>
   );
 }
 
@@ -72,5 +75,17 @@ describe("app shell integration", () => {
     // The header remains rendered alongside the single main region.
     expect(header).toBeInTheDocument();
     expect(screen.getAllByRole("main")).toHaveLength(1);
+  });
+
+  // The contextual action bar mounts within the shell without crashing and,
+  // with no page-registered actions, contributes no controls at "/".
+  it("mounts the contextual action bar without crashing (empty by default)", () => {
+    render(<AppShell>route content</AppShell>);
+
+    expect(screen.getByRole("banner")).toBeInTheDocument();
+    expect(screen.getAllByRole("main")).toHaveLength(1);
+    expect(
+      screen.queryByRole("button", { name: "New deck" }),
+    ).not.toBeInTheDocument();
   });
 });

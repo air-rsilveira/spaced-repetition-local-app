@@ -8,8 +8,16 @@ import {
   within,
 } from "@testing-library/react";
 
+import { vi } from "vitest";
+
+vi.mock("next/navigation", () => ({
+  usePathname: vi.fn(() => "/"),
+}));
+
 import Dashboard from "@/components/Dashboard";
+import ContextualActionBar from "@/components/ContextualActionBar";
 import { DecksProvider } from "@/contexts/DecksContext";
+import { UIActionsProvider } from "@/contexts/UIActionsContext";
 import { DECKS_STORAGE_KEY } from "@/lib/storage";
 import { makeDeck, singleDeckList } from "@/mocks";
 import type { DeckList } from "@/types";
@@ -40,9 +48,12 @@ function seedDecks(decks: DeckList) {
 
 function renderDashboard() {
   return render(
-    <DecksProvider>
-      <Dashboard />
-    </DecksProvider>,
+    <UIActionsProvider>
+      <ContextualActionBar />
+      <DecksProvider>
+        <Dashboard />
+      </DecksProvider>
+    </UIActionsProvider>,
   );
 }
 
@@ -68,6 +79,25 @@ describe("Dashboard wiring — create entry points open the form (1.1)", () => {
       within(dialog).getByRole("heading", { name: /create deck/i }),
     ).toBeInTheDocument();
     expect(within(dialog).getByLabelText(/name/i)).toHaveValue("");
+  });
+
+  it("opens the file picker when the bar 'Upload deck' button is clicked", async () => {
+    // Empty store: the bar still renders on the landing route.
+    renderDashboard();
+
+    const uploadButton = await screen.findByRole("button", {
+      name: /upload deck/i,
+    });
+
+    // The hidden import file input is the picker the button opens.
+    const fileInput = document.getElementById(
+      "import-file",
+    ) as HTMLInputElement;
+    const clickSpy = vi.spyOn(fileInput, "click");
+
+    fireEvent.click(uploadButton);
+
+    expect(clickSpy).toHaveBeenCalledTimes(1);
   });
 
   it("opens the DeckForm in create mode from the EmptyState 'Create deck' button", async () => {
