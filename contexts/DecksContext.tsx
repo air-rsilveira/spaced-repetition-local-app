@@ -11,6 +11,7 @@ import {
 } from "react";
 
 import { loadDecks, saveDecks } from "@/lib/storage";
+import { promoteCard, resetCard } from "@/lib/leitner";
 import { deckFormSchema, cardFormSchema } from "@/types";
 import type { Card, Deck, DeckList } from "@/types";
 import type { z } from "zod";
@@ -115,6 +116,8 @@ export interface DecksContextValue {
   addCard: (input: AddCardInput) => AddCardResult;
   updateCard: (input: UpdateCardInput) => UpdateCardResult;
   deleteCard: (deckId: string, cardId: string) => DeleteCardResult;
+  gradeCardCorrect: (deckId: string, cardId: string, today: Date) => UpdateCardResult;
+  gradeCardIncorrect: (deckId: string, cardId: string, today: Date) => UpdateCardResult;
 }
 
 /**
@@ -445,6 +448,100 @@ export function DecksProvider({ children, initialDecks }: DecksProviderProps) {
     [decks],
   );
 
+  const gradeCardCorrect = useCallback(
+    (deckId: string, cardId: string, today: Date): UpdateCardResult => {
+      const deckIndex = decks.findIndex((deck) => deck.id === deckId);
+      if (deckIndex === -1) {
+        const error: DecksError = {
+          code: "not-found",
+          message: `No deck with id "${deckId}".`,
+        };
+        setError(error);
+        return { ok: false, error };
+      }
+
+      const deck = decks[deckIndex];
+      const cardIndex = deck.cards.findIndex((card) => card.id === cardId);
+      if (cardIndex === -1) {
+        const error: DecksError = {
+          code: "not-found",
+          message: `No card with id "${cardId}".`,
+        };
+        setError(error);
+        return { ok: false, error };
+      }
+
+      const existing = deck.cards[cardIndex];
+      const promoted = promoteCard(existing, today);
+
+      const updated: Card = {
+        ...promoted,
+      };
+
+      setError(null);
+      setDecks((prev) => {
+        const newDecks = [...prev];
+        newDecks[deckIndex] = {
+          ...newDecks[deckIndex],
+          cards: newDecks[deckIndex].cards.map((card) =>
+            card.id === cardId ? updated : card,
+          ),
+        };
+        return newDecks;
+      });
+
+      return { ok: true, card: updated };
+    },
+    [decks],
+  );
+
+  const gradeCardIncorrect = useCallback(
+    (deckId: string, cardId: string, today: Date): UpdateCardResult => {
+      const deckIndex = decks.findIndex((deck) => deck.id === deckId);
+      if (deckIndex === -1) {
+        const error: DecksError = {
+          code: "not-found",
+          message: `No deck with id "${deckId}".`,
+        };
+        setError(error);
+        return { ok: false, error };
+      }
+
+      const deck = decks[deckIndex];
+      const cardIndex = deck.cards.findIndex((card) => card.id === cardId);
+      if (cardIndex === -1) {
+        const error: DecksError = {
+          code: "not-found",
+          message: `No card with id "${cardId}".`,
+        };
+        setError(error);
+        return { ok: false, error };
+      }
+
+      const existing = deck.cards[cardIndex];
+      const reset = resetCard(existing, today);
+
+      const updated: Card = {
+        ...reset,
+      };
+
+      setError(null);
+      setDecks((prev) => {
+        const newDecks = [...prev];
+        newDecks[deckIndex] = {
+          ...newDecks[deckIndex],
+          cards: newDecks[deckIndex].cards.map((card) =>
+            card.id === cardId ? updated : card,
+          ),
+        };
+        return newDecks;
+      });
+
+      return { ok: true, card: updated };
+    },
+    [decks],
+  );
+
   const value: DecksContextValue = {
     decks,
     status,
@@ -455,6 +552,8 @@ export function DecksProvider({ children, initialDecks }: DecksProviderProps) {
     addCard,
     updateCard,
     deleteCard,
+    gradeCardCorrect,
+    gradeCardIncorrect,
   };
 
   return (

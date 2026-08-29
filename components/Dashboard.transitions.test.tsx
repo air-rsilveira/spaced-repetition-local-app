@@ -40,6 +40,8 @@ function makeStore(
     addCard: vi.fn(),
     updateCard: vi.fn(),
     deleteCard: vi.fn(),
+    gradeCardCorrect: vi.fn(),
+    gradeCardIncorrect: vi.fn(),
   };
 }
 

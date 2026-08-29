@@ -1,0 +1,29 @@
+
+> spaced-repetition-local-app@0.1.0 build
+> next build
+
+Ôû▓ Next.js 16.3.3 (Turbopack)
+Ô£ô Running next.config.ts took 178ms
+
+  Creating an optimized production build ...
+Ô£ô Compiled successfully in 966ms
+  Running TypeScript ...
+  Finished TypeScript in 4.6s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/4) ...
+  Generating static pages using 7 workers (1/4) 
+  Generating static pages using 7 workers (2/4) 
+  Generating static pages using 7 workers (3/4) 
+Ô£ô Generating static pages using 7 workers (4/4) in 1474ms
+  Finalizing page optimization ...
+
+Route (app)
+Ôöî Ôùï /
+Ôö£ Ôùï /_not-found
+Ôö£ ãÆ /deck/[id]
+Ôöö ãÆ /deck/[id]/review
+
+
+Ôùï  (Static)   prerendered as static content
+ãÆ  (Dynamic)  server-rendered on demand
+

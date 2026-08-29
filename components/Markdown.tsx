@@ -19,7 +19,7 @@ export interface MarkdownProps {
  */
 export default function Markdown({ children }: MarkdownProps) {
   return (
-    <div className="prose prose-sm max-w-none text-aws-gray-900 dark:text-aws-white">
+    <div className="prose prose-sm max-w-none text-aws-gray-900">
       <ReactMarkdown remarkPlugins={[remarkGfm]}>{children}</ReactMarkdown>
     </div>
   );

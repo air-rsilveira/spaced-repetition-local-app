@@ -35,7 +35,7 @@ route id via `use(params)` typed with the global `PageProps<'/deck/[id]'>` helpe
     - Barrel-export the grown `Card`, `cardSchema`, `cardFormSchema`, and `CardFormInput` from `types/index.ts`
     - _Requirements: 7.1, 7.2, 7.3, 7.4, 7.5, 7.7, 7.8_
 
-  - [~]* 1.2 Extend `types/deck.test.ts` with the card schema round-trip property
+  - [ ]* 1.2 Extend `types/deck.test.ts` with the card schema round-trip property
     - **Property 1: Card schema validation round-trip over the grown shape**
     - **Validates: Requirements 7.1, 7.2, 7.3, 7.4, 7.5, 7.6**
     - Assert valid grown cards (incl. both `null` and ISO `lastReviewed`) parse to an equal value; cards with empty/overlong `front`/`back`, non-integer or `< 1` `box`, non-null non-ISO `lastReviewed`, or empty/unparseable `createdAt` fail `safeParse`
@@ -111,7 +111,7 @@ route id via `use(params)` typed with the global `PageProps<'/deck/[id]'>` helpe
     - _Requirements: 5.3, 5.4, 5.5_
 
 - [ ] 8. Create the card form component
-  - [~] 8.1 Implement `components/CardForm.tsx` (`"use client"`)
+  - [ ] 8.1 Implement `components/CardForm.tsx` (`"use client"`)
     - Controlled create/edit form taking `deckId`, `mode` (`create | edit`), and `onClose`: create mode starts empty; edit mode pre-fills from `mode.card.front`/`back`
     - Live `Markdown_Preview` region rendering the current `front` and `back` through `Markdown`, updating as the user types without a page reload; empty fields render an empty preview
     - Validate `{ front, back }` with `cardFormSchema` on submit; on failure set per-field errors from `error.issues` (keyed by `issue.path[0]`), retain entered values, and do not call the store
@@ -140,7 +140,7 @@ route id via `use(params)` typed with the global `PageProps<'/deck/[id]'>` helpe
     - _Requirements: 1.3, 1.4, 1.7_
 
 - [ ] 10. Create the deck detail route and page
-  - [~] 10.1 Implement `app/deck/[id]/page.tsx` (`"use client"`)
+  - [ ] 10.1 Implement `app/deck/[id]/page.tsx` (`"use client"`)
     - Read the route id via `use(params)` typed with the global `PageProps<'/deck/[id]'>` helper (no import; matches `LayoutProps<"/">` usage)
     - Consume `useDecks()`; while `status` is not `"ready"` render a loading state and read `localStorage` only after mount (via the provider's hydration guard, never during render)
     - When ready and a deck matches the route id, render the deck name and `CardList` for that deck's cards; when ready and no deck matches, render the `Deck_Missing_State`

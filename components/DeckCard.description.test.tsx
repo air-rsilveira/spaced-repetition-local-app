@@ -49,7 +49,7 @@ describe("DeckCard conditional description", () => {
     fc.assert(
       fc.property(arbDeckWithVariedDescription, (deck) => {
         try {
-          const { container } = render(<DeckCard deck={deck} />);
+          const { container } = render(<DeckCard deck={deck} dueCount={0} />);
 
           // A description is "present" only after trimming to non-empty.
           const trimmed = deck.description?.trim();

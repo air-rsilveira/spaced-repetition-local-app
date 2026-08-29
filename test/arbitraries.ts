@@ -65,11 +65,11 @@ export const arbCardBack: fc.Arbitrary<string> = fc
   .filter((s) => s.trim().length >= 1 && s.trim().length <= 5000);
 
 /**
- * A valid leitner box number: an integer from 1 to 8 (representing a standard
- * 8-box spaced repetition system). Matches the `box` field constraint in the
- * card schema.
+ * A valid leitner box number: an integer from 1 to 5 (representing the Leitner
+ * spaced repetition system with 5 boxes). Matches the `box` field constraint in
+ * the leitner module's getInterval() function.
  */
-export const arbBox: fc.Arbitrary<number> = fc.integer({ min: 1, max: 8 });
+export const arbBox: fc.Arbitrary<number> = fc.integer({ min: 1, max: 5 });
 
 /**
  * A valid or null `lastReviewed`: either `null` (never reviewed) or a valid

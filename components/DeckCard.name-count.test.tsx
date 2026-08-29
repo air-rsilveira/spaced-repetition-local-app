@@ -10,7 +10,7 @@ describe("DeckCard name and card count", () => {
   it("renders the deck name as visible text and a card count equal to the number of cards (0 when empty)", () => {
     fc.assert(
       fc.property(arbDeck, (deck) => {
-        const { container } = render(<DeckCard deck={deck} />);
+        const { container } = render(<DeckCard deck={deck} dueCount={0} />);
 
         try {
           const rendered = container.textContent ?? "";

@@ -1,0 +1,420 @@
+{
+  "pbtResults": {
+    "4.2 Write property tests for dashboard due counts": {
+      "status": "passed",
+      "lastRunTimestamp": 1787960558740
+    },
+    "3.7 Write property tests for review page": {
+      "status": "passed",
+      "lastRunTimestamp": 1787960682606
+    }
+  },
+  "executionHistory": {
+    "1.1 Write unit tests for `getInterval()`": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103582
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958118942
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959267164
+      }
+    ],
+    "1.2 Write unit tests for `isDue()`": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103654
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958119105
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959267403
+      }
+    ],
+    "1.3 Write unit tests for `getDueCards()`": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103703
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958119076
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959267345
+      }
+    ],
+    "1.4 Write unit tests for `promoteCard()`": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103758
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958119037
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959267257
+      }
+    ],
+    "1.5 Write unit tests for `resetCard()`": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103792
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958119005
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959267463
+      }
+    ],
+    "2.1 Write unit tests for grade card actions": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103827
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959283576
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959551461
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960148751
+      }
+    ],
+    "3.1 Create ReviewPage component structure": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103907
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960170171
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960574030
+      }
+    ],
+    "3.2 Implement due cards filtering": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103939
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960170220
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960574066
+      }
+    ],
+    "3.3 Implement card review interface": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958103974
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960170055
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960574227
+      }
+    ],
+    "3.4 Implement grading functionality": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104008
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960170097
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960574256
+      }
+    ],
+    "3.5 Implement progress tracking": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104042
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960998216
+      }
+    ],
+    "3.6 Implement completion summary": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104075
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960998270
+      }
+    ],
+    "3.7 Write property tests for review page": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104108
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960998414
+      }
+    ],
+    "3.8 Write unit tests for edge cases": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104157
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960998356
+      }
+    ],
+    "4.1 Update Dashboard to calculate due counts": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104248
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960170134
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960574184
+      }
+    ],
+    "4.2 Write property tests for dashboard due counts": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104279
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960170251
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960574104
+      }
+    ],
+    "5.1 Update DeckCard interface": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104311
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959283655
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959551819
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960148835
+      }
+    ],
+    "5.2 Display due count badge": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104344
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959283713
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959551779
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960148785
+      }
+    ],
+    "5.3 Write unit tests for due count display": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104375
+      },
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959283762
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787959551558
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960148902
+      }
+    ],
+    "6.1 Test end-to-end review session": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104418
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961357232
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961694408
+      }
+    ],
+    "6.2 Test due count updates after grading": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104452
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961357332
+      },
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961694318
+      }
+    ],
+    "6.3 Test persistence verification": [
+      {
+        "executionId": "78e43dd2-4c43-46dd-95a5-e3229a9818f8",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787958104486
+      }
+    ],
+    "2. Update DecksContext (`contexts/DecksContext.tsx`)": [
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787960148936
+      }
+    ],
+    "1. Create Leitner Module (`lib/leitner.ts`)": [
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961705136
+      }
+    ],
+    "4. Update Dashboard (`app/page.tsx` and `components/Dashboard.tsx`)": [
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961705237
+      }
+    ],
+    "5. Update DeckCard Component": [
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961705301
+      }
+    ],
+    "3. Create Review Page (`app/deck/[id]/review/page.tsx`)": [
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961705350
+      }
+    ],
+    "6. Integration Tests": [
+      {
+        "executionId": "ed44c6d4-95e1-47ab-8db8-54fb562f8d6f",
+        "chatSessionId": "sess_80251746-099d-4db8-a941-d3623eeb8cd3",
+        "timestamp": 1787961705385
+      }
+    ]
+  }
+}

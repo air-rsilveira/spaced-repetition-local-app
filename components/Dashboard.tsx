@@ -9,6 +9,7 @@ import DeckCardActions from "@/components/DeckCardActions";
 import DeckForm from "@/components/DeckForm";
 import DeleteConfirm from "@/components/DeleteConfirm";
 import EmptyState from "@/components/EmptyState";
+import { getDueCards } from "@/lib/leitner";
 import type { Deck } from "@/types";
 
 /**
@@ -131,18 +132,22 @@ export default function Dashboard() {
           </button>
         </div>
         <ul className="mt-6 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {decks.map((deck) => (
-            <li key={deck.id} className="flex flex-col gap-3">
-              <Link href={`/deck/${deck.id}`}>
-                <DeckCard deck={deck} />
-              </Link>
-              <DeckCardActions
-                deck={deck}
-                onEdit={openEdit}
-                onDelete={openDelete}
-              />
-            </li>
-          ))}
+          {decks.map((deck) => {
+            const today = new Date();
+            const dueCount = getDueCards(deck, today).length;
+            return (
+              <li key={deck.id} className="flex flex-col gap-3">
+                <Link href={`/deck/${deck.id}`}>
+                  <DeckCard deck={deck} dueCount={dueCount} />
+                </Link>
+                <DeckCardActions
+                  deck={deck}
+                  onEdit={openEdit}
+                  onDelete={openDelete}
+                />
+              </li>
+            );
+          })}
         </ul>
       </section>
       {renderOverlay()}
