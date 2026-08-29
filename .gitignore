@@ -22,3 +22,36 @@ lerna-debug.log*
 # temp directory
 .temp
 .tmp
+
+# Next.js
+/.next/
+/out/
+.vercel
+
+# TypeScript
+*.tsbuildinfo
+next-env.d.ts
+
+# testing
+/coverage
+
+# misc
+.DS_Store
+*.pem
+
+
+# Generated output files
+test-results.txt
+build_output.txt
+testfile.txt
+$null
+
+# KiroGraph files
+.kirograph/
+.kiro/hooks/kirograph-sync-if-dirty.json
+
+# IDE/editor files
+*.swp
+*~
+.idea/
+.vscode/

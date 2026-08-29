@@ -1,0 +1,610 @@
+{
+  "pbtResults": {
+    "1.2 Write property test for `resolvePhase` exactly-one-phase": {
+      "status": "passed",
+      "lastRunTimestamp": 1787965988552
+    },
+    "1.9 Add property test for `NavLinks` active-state tracking": {
+      "status": "passed",
+      "lastRunTimestamp": 1787966138752
+    },
+    "3.4 Write property test for invalid-import rejection": {
+      "status": "passed",
+      "lastRunTimestamp": 1787966712202
+    }
+  },
+  "executionHistory": {
+    "1.1 Implement `resolvePhase` status-gating helper": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176568
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965187242
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965414955
+      }
+    ],
+    "1.3 Implement `LoadingState` shared component": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176614
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965187406
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965415017
+      }
+    ],
+    "1.5 Implement `ErrorState` shared component": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176690
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965187309
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965415117
+      }
+    ],
+    "1.7 Implement `BackLink` shared navigation component": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176751
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965187276
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965415235
+      }
+    ],
+    "2.1 Verify and normalize `replaceDeck` in `contexts/DecksContext.tsx`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176793
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965187376
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965415068
+      }
+    ],
+    "3.1 Remove the dead \"Import deck\" stub button from `components/EmptyState.tsx`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176827
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965187450
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965415190
+      }
+    ],
+    "4.1 Render the post-review export reminder in `app/deck/[id]/review/page.tsx`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176864
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966771961
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699211
+      }
+    ],
+    "5.1 Apply `resolvePhase` and shared components in `components/Dashboard.tsx`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176901
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966772238
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699266
+      }
+    ],
+    "6.1 Route detail rendering through the shared phase and add navigation": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176939
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966772101
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699497
+      }
+    ],
+    "7.1 Move review-session initialization into a mount-gated effect": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965176976
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699645
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319654
+      }
+    ],
+    "7.3 Route not-found and loading through the shared phase; add \"Back to deck\"": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965177008
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699390
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319437
+      }
+    ],
+    "7.4 Replace both `alert()` calls with an in-view `ErrorState`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965177045
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699542
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319381
+      }
+    ],
+    "7.6 Finalize the completion summary navigation": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965177077
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969476040
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969669931
+      }
+    ],
+    "8. Checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965177127
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319707
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968703161
+      }
+    ],
+    "9.1 Apply mobile-first responsive layout and palette discipline": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965177179
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319800
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969388655
+      }
+    ],
+    "10.1 Remove orphaned scaffolding and unreferenced modules": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965177235
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319846
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969388558
+      }
+    ],
+    "10.2 Ensure `npm run lint` and `npm run build` pass with no hydration warnings": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965177277
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319760
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969388375
+      }
+    ],
+    "12. Final checkpoint - Ensure all tests pass": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965177312
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969388747
+      }
+    ],
+    "2. Harden the `replaceDeck` store method for import duplicate resolution": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965415291
+      }
+    ],
+    "3. Complete the import flow and remove the dead `EmptyState` stub": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965415332
+      }
+    ],
+    "1.2 Write property test for `resolvePhase` exactly-one-phase": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965438767
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965467583
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966088734
+      }
+    ],
+    "2.2 Write unit tests for `replaceDeck`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965438827
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965467478
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966088775
+      }
+    ],
+    "1.4 Write unit tests for `LoadingState`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965438921
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965467341
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966088881
+      }
+    ],
+    "1.6 Write unit tests for `ErrorState`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965438964
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965467522
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966088825
+      }
+    ],
+    "1.8 Write unit tests for `BackLink`": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965439030
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965467407
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966089018
+      }
+    ],
+    "3.2 Update/confirm `EmptyState` tests after stub removal": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965439080
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966088971
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966771794
+      }
+    ],
+    "1.9 Add property test for `NavLinks` active-state tracking": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965439127
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966089075
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966771845
+      }
+    ],
+    "3.3 Confirm import success/failure flow tests": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965439165
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966089184
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966771902
+      }
+    ],
+    "3.4 Write property test for invalid-import rejection": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787965439201
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966089121
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966772173
+      }
+    ],
+    "1. Build shared presentational primitives (phase helper + state/nav components)": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966089225
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966089261
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966089286
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966089303
+      }
+    ],
+    "4.2 Write unit tests for the export reminder presence/absence": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787966772025
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699101
+      }
+    ],
+    "5.2 Update affected Dashboard tests for the new loading phase": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699341
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319569
+      }
+    ],
+    "6.2 Write unit tests for deck-detail navigation and states": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699447
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787968319495
+      }
+    ],
+    "4. Wire `ExportControl` into the review completion summary": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699707
+      }
+    ],
+    "5. Refactor `Dashboard` onto the shared phase + state components": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699751
+      }
+    ],
+    "6. Refactor `Deck_Detail_View` (`app/deck/[id]/page.tsx`)": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787967699812
+      }
+    ],
+    "11.1 Write the end-to-end round-trip integration test": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969388502
+      }
+    ],
+    "11. End-to-end integration test (import → detail → review → export)": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969388800
+      }
+    ],
+    "9. Responsive and AWS-palette pass across screens": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969388865
+      }
+    ],
+    "7. Refactor `Review_View` (`app/deck/[id]/review/page.tsx`)": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969461685
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969670070
+      }
+    ],
+    "10. Cleanup and quality gate": [
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969679127
+      },
+      {
+        "executionId": "3561928e-2478-4ba9-ae5d-ec1e27f0fea3",
+        "chatSessionId": "sess_37331285-761a-49b7-82e6-f280658ebdd1",
+        "timestamp": 1787969692831
+      }
+    ]
+  }
+}

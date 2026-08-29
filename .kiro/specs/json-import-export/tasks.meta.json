@@ -1,0 +1,974 @@
+{
+  "pbtResults": {},
+  "executionHistory": {
+    "`serializeDeck(deck: Deck): string` exports a deck to human-readable JSON": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970886809
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970907794
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972205246
+      }
+    ],
+    "`parseDeck(jsonString: string): Result<Deck, string>` parses and validates JSON": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970886918
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972247986
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972281636
+      }
+    ],
+    "Distinguishes between parse errors and validation errors with clear messages": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970886980
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972294102
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972305978
+      }
+    ],
+    "Round-trip test passes: `parseDeck(serializeDeck(deck))` produces equivalent deck": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887044
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972395845
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972405862
+      }
+    ],
+    "All unit tests pass": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887103
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972441900
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972453246
+      }
+    ],
+    "Serialize produces valid JSON with all deck and card fields": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887170
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972487738
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972497929
+      }
+    ],
+    "Parse succeeds on valid JSON and produced decks match schema": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887227
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972510382
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972518020
+      }
+    ],
+    "Parse fails gracefully on invalid JSON with clear error": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887277
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972528406
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972542512
+      }
+    ],
+    "Parse fails gracefully on invalid schema with clear error": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887326
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972554210
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972565286
+      }
+    ],
+    "Round-trip (serialize → parse) produces deck equivalent to original": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887402
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972577869
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972589092
+      }
+    ],
+    "All tests pass": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887459
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888222
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889788
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972666123
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972673422
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973015962
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973323402
+      }
+    ],
+    "Renders an export button or icon": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887545
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972691032
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972736235
+      }
+    ],
+    "On click, serializes deck to JSON using `deckIO.serializeDeck`": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887600
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972798984
+      }
+    ],
+    "Creates a Blob and object URL": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887652
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972808565
+      }
+    ],
+    "Triggers download with filename `<deck-id>.json`": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887704
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972820359
+      }
+    ],
+    "Revokes object URL after download initiated": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887755
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972834280
+      }
+    ],
+    "Handles errors gracefully (displays error message)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887807
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972845903
+      }
+    ],
+    "Props accept `deck: Deck` and optional callbacks": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887857
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972855335
+      }
+    ],
+    "Button renders with correct label/icon": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887907
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972928979
+      }
+    ],
+    "On click, calls `serializeDeck` with correct deck": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970887957
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972941285
+      }
+    ],
+    "Creates Blob with JSON content": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888040
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972953578
+      }
+    ],
+    "Creates and revokes object URL (check via spies)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888091
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972968612
+      }
+    ],
+    "Triggers download with correct filename": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888143
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787972987957
+      }
+    ],
+    "Error message displays on failure": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888191
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973003297
+      }
+    ],
+    "File input accepts `.json` files only": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888320
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973080409
+      }
+    ],
+    "On file selection, reads file contents": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888389
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973134155
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973134176
+      }
+    ],
+    "Validates file using `deckIO.parseDeck`": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888468
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973171480
+      }
+    ],
+    "On validation success + new ID: adds deck to store immediately": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888542
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973171626
+      }
+    ],
+    "On validation success + duplicate ID: shows modal with replace/new-id options": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888610
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973171575
+      }
+    ],
+    "Modal: replace action calls `replaceDeck` (or similar)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888688
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973171686
+      }
+    ],
+    "Modal: new-id generates unique ID and calls `addDeck`": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888791
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973195553
+      }
+    ],
+    "Modal: cancel leaves store unchanged": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888874
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973195437
+      }
+    ],
+    "On validation failure: displays error, store unchanged": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970888942
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973195390
+      }
+    ],
+    "On file read failure: displays error, store unchanged": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889022
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973195509
+      }
+    ],
+    "After successful import: error cleared, file input reset": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889090
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889761
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973207703
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973307089
+      }
+    ],
+    "All errors handled without throwing": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889173
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973207744
+      }
+    ],
+    "File input renders and accepts `.json` files": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889242
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973269089
+      }
+    ],
+    "Valid file: parses, validates, calls `addDeck` with correct deck": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889318
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973292344
+      }
+    ],
+    "Invalid JSON file: displays error, store unchanged": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889384
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973292419
+      }
+    ],
+    "Invalid schema file: displays error, store unchanged": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889437
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973292469
+      }
+    ],
+    "File read error: displays error, store unchanged": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889488
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973292507
+      }
+    ],
+    "Duplicate ID: shows modal with correct deck info": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889541
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973306970
+      }
+    ],
+    "Modal replace: calls `replaceDeck` with correct deck": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889591
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973307020
+      }
+    ],
+    "Modal new-id: calls `addDeck` with new unique ID": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889664
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973323382
+      }
+    ],
+    "Modal cancel: leaves store unchanged, closes modal": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889736
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973307070
+      }
+    ],
+    "`replaceDeck(id: string, newDeck: Deck): void` method exists": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889841
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973399475
+      }
+    ],
+    "Replaces deck with same ID in store": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889890
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973399554
+      }
+    ],
+    "Persists change to storage": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889940
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973399632
+      }
+    ],
+    "Returns without throwing on error": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970889990
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973399686
+      }
+    ],
+    "Dashboard renders `ExportControl` for each deck": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890039
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973531296
+      }
+    ],
+    "Export action is accessible and properly styled": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890089
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890359
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973560283
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973631875
+      }
+    ],
+    "Export works as expected (download triggered)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890138
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973560347
+      }
+    ],
+    "Dashboard renders `ImportControl` component": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890184
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973590451
+      }
+    ],
+    "`ImportControl` is visible even when deck listing is empty": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890234
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973590593
+      }
+    ],
+    "Import works as expected (file read, validation, merge)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890286
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973590532
+      }
+    ],
+    "Deck detail page renders `ExportControl` for displayed deck": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890336
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973631833
+      }
+    ],
+    "Export works as expected": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890405
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787973631942
+      }
+    ],
+    "Export deck from dashboard": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890455
+      }
+    ],
+    "Import exported file": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890506
+      }
+    ],
+    "Imported deck matches original": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890556
+      }
+    ],
+    "No duplicate ID conflicts (or user resolves them)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890605
+      }
+    ],
+    "Test passes": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890656
+      },
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890816
+      }
+    ],
+    "For all generated valid decks: `parseDeck(serializeDeck(deck))` produces equivalent deck": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890729
+      }
+    ],
+    "Test covers multiple iterations (e.g., 100+ examples)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890787
+      }
+    ],
+    "Export button visible on each deck card and deck detail page": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890859
+      }
+    ],
+    "Clicking export downloads `.json` file with correct name": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890907
+      }
+    ],
+    "Downloaded file contains valid JSON and can be re-imported": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970890959
+      }
+    ],
+    "Import control visible on dashboard": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891007
+      }
+    ],
+    "File input accepts `.json` files": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891057
+      }
+    ],
+    "Importing valid file adds deck to listing": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891113
+      }
+    ],
+    "Importing invalid file displays error message": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891172
+      }
+    ],
+    "Duplicate ID resolution works (replace and new-id paths)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891238
+      }
+    ],
+    "Feature works on mobile, tablet, and desktop widths": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891292
+      }
+    ],
+    "Export button has accessible label or icon with `aria-label`": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891371
+      }
+    ],
+    "File input has associated label": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891422
+      }
+    ],
+    "Error messages are announced to screen readers": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891472
+      }
+    ],
+    "Modal has proper ARIA attributes (role, aria-labelledby, etc.)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891524
+      }
+    ],
+    "Keyboard navigation works (Tab through controls, Enter to confirm)": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891574
+      }
+    ],
+    "Feature is complete and all tests pass": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891623
+      }
+    ],
+    "README or inline documentation explains how to use import/export": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891676
+      }
+    ],
+    "Code comments explain key logic": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891723
+      }
+    ],
+    "No outstanding bugs or TODOs": [
+      {
+        "executionId": "05a73fc8-d145-47cb-be80-e4a177aa0590",
+        "chatSessionId": "sess_2e167dd1-0e79-4164-94a4-07397536bd9e",
+        "timestamp": 1787970891775
+      }
+    ]
+  }
+}
