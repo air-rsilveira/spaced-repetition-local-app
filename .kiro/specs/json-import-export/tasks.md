@@ -5,11 +5,11 @@
 Create the core pure functions for serializing and parsing decks without side effects.
 
 ### Acceptance Criteria
-- [ ] `serializeDeck(deck: Deck): string` exports a deck to human-readable JSON
-- [ ] `parseDeck(jsonString: string): Result<Deck, string>` parses and validates JSON
-- [ ] Distinguishes between parse errors and validation errors with clear messages
-- [ ] Round-trip test passes: `parseDeck(serializeDeck(deck))` produces equivalent deck
-- [ ] All unit tests pass
+- [x] `serializeDeck(deck: Deck): string` exports a deck to human-readable JSON
+- [x] `parseDeck(jsonString: string): Result<Deck, string>` parses and validates JSON
+- [x] Distinguishes between parse errors and validation errors with clear messages
+- [x] Round-trip test passes: `parseDeck(serializeDeck(deck))` produces equivalent deck
+- [x] All unit tests pass
 
 ### Files to Create
 - `lib/deckIO.ts` — Serialize/parse functions
@@ -29,12 +29,12 @@ Create the core pure functions for serializing and parsing decks without side ef
 Test serialize and parse functions thoroughly, including round-trip and error cases.
 
 ### Acceptance Criteria
-- [ ] Serialize produces valid JSON with all deck and card fields
-- [ ] Parse succeeds on valid JSON and produced decks match schema
-- [ ] Parse fails gracefully on invalid JSON with clear error
-- [ ] Parse fails gracefully on invalid schema with clear error
-- [ ] Round-trip (serialize → parse) produces deck equivalent to original
-- [ ] All tests pass
+- [x] Serialize produces valid JSON with all deck and card fields
+- [x] Parse succeeds on valid JSON and produced decks match schema
+- [x] Parse fails gracefully on invalid JSON with clear error
+- [x] Parse fails gracefully on invalid schema with clear error
+- [x] Round-trip (serialize → parse) produces deck equivalent to original
+- [x] All tests pass
 
 ### Files to Create
 - `lib/deckIO.test.ts` — Unit tests
@@ -52,13 +52,13 @@ Test serialize and parse functions thoroughly, including round-trip and error ca
 Create the export UI component that serializes a deck and triggers download.
 
 ### Acceptance Criteria
-- [ ] Renders an export button or icon
-- [ ] On click, serializes deck to JSON using `deckIO.serializeDeck`
-- [ ] Creates a Blob and object URL
-- [ ] Triggers download with filename `<deck-id>.json`
-- [ ] Revokes object URL after download initiated
-- [ ] Handles errors gracefully (displays error message)
-- [ ] Props accept `deck: Deck` and optional callbacks
+- [x] Renders an export button or icon
+- [x] On click, serializes deck to JSON using `deckIO.serializeDeck`
+- [x] Creates a Blob and object URL
+- [x] Triggers download with filename `<deck-id>.json`
+- [x] Revokes object URL after download initiated
+- [x] Handles errors gracefully (displays error message)
+- [x] Props accept `deck: Deck` and optional callbacks
 
 ### Files to Create
 - `components/ExportControl.tsx` — Export UI component
@@ -80,12 +80,12 @@ Create the export UI component that serializes a deck and triggers download.
 Test export button, serialization, download, and error handling.
 
 ### Acceptance Criteria
-- [ ] Button renders with correct label/icon
-- [ ] On click, calls `serializeDeck` with correct deck
-- [ ] Creates Blob with JSON content
-- [ ] Creates and revokes object URL (check via spies)
-- [ ] Triggers download with correct filename
-- [ ] Error message displays on failure
+- [x] Button renders with correct label/icon
+- [x] On click, calls `serializeDeck` with correct deck
+- [x] Creates Blob with JSON content
+- [x] Creates and revokes object URL (check via spies)
+- [x] Triggers download with correct filename
+- [x] Error message displays on failure
 - [ ] All tests pass
 
 ### Files to Create
@@ -104,18 +104,18 @@ Test export button, serialization, download, and error handling.
 Create the import UI component that accepts a file, validates, and handles duplicate IDs.
 
 ### Acceptance Criteria
-- [ ] File input accepts `.json` files only
-- [ ] On file selection, reads file contents
-- [ ] Validates file using `deckIO.parseDeck`
-- [ ] On validation success + new ID: adds deck to store immediately
-- [ ] On validation success + duplicate ID: shows modal with replace/new-id options
-- [ ] Modal: replace action calls `replaceDeck` (or similar)
-- [ ] Modal: new-id generates unique ID and calls `addDeck`
-- [ ] Modal: cancel leaves store unchanged
-- [ ] On validation failure: displays error, store unchanged
-- [ ] On file read failure: displays error, store unchanged
-- [ ] After successful import: error cleared, file input reset
-- [ ] All errors handled without throwing
+- [x] File input accepts `.json` files only
+- [x] On file selection, reads file contents
+- [x] Validates file using `deckIO.parseDeck`
+- [x] On validation success + new ID: adds deck to store immediately
+- [x] On validation success + duplicate ID: shows modal with replace/new-id options
+- [x] Modal: replace action calls `replaceDeck` (or similar)
+- [x] Modal: new-id generates unique ID and calls `addDeck`
+- [x] Modal: cancel leaves store unchanged
+- [x] On validation failure: displays error, store unchanged
+- [x] On file read failure: displays error, store unchanged
+- [x] After successful import: error cleared, file input reset
+- [x] All errors handled without throwing
 
 ### Files to Create
 - `components/ImportControl.tsx` — Import UI with modal
@@ -141,15 +141,15 @@ Create the import UI component that accepts a file, validates, and handles dupli
 Test file input, parsing, validation, duplicate modal, and store interaction.
 
 ### Acceptance Criteria
-- [ ] File input renders and accepts `.json` files
-- [ ] Valid file: parses, validates, calls `addDeck` with correct deck
-- [ ] Invalid JSON file: displays error, store unchanged
-- [ ] Invalid schema file: displays error, store unchanged
-- [ ] File read error: displays error, store unchanged
-- [ ] Duplicate ID: shows modal with correct deck info
-- [ ] Modal replace: calls `replaceDeck` with correct deck
-- [ ] Modal new-id: calls `addDeck` with new unique ID
-- [ ] Modal cancel: leaves store unchanged, closes modal
+- [x] File input renders and accepts `.json` files
+- [x] Valid file: parses, validates, calls `addDeck` with correct deck
+- [x] Invalid JSON file: displays error, store unchanged
+- [x] Invalid schema file: displays error, store unchanged
+- [x] File read error: displays error, store unchanged
+- [x] Duplicate ID: shows modal with correct deck info
+- [x] Modal replace: calls `replaceDeck` with correct deck
+- [x] Modal new-id: calls `addDeck` with new unique ID
+- [x] Modal cancel: leaves store unchanged, closes modal
 - [ ] After successful import: error cleared, file input reset
 - [ ] All tests pass
 
@@ -170,10 +170,10 @@ Test file input, parsing, validation, duplicate modal, and store interaction.
 Add or verify `replaceDeck` method for duplicate resolution.
 
 ### Acceptance Criteria
-- [ ] `replaceDeck(id: string, newDeck: Deck): void` method exists
-- [ ] Replaces deck with same ID in store
-- [ ] Persists change to storage
-- [ ] Returns without throwing on error
+- [x] `replaceDeck(id: string, newDeck: Deck): void` method exists
+- [x] Replaces deck with same ID in store
+- [x] Persists change to storage
+- [x] Returns without throwing on error
 
 ### Files to Read (for context)
 - `contexts/DecksContext.tsx` — Current implementation
@@ -190,9 +190,9 @@ Add or verify `replaceDeck` method for duplicate resolution.
 Add export action to each deck in the dashboard listing.
 
 ### Acceptance Criteria
-- [ ] Dashboard renders `ExportControl` for each deck
-- [ ] Export action is accessible and properly styled
-- [ ] Export works as expected (download triggered)
+- [x] Dashboard renders `ExportControl` for each deck
+- [x] Export action is accessible and properly styled
+- [x] Export works as expected (download triggered)
 
 ### Files to Read (for context)
 - `components/Dashboard.tsx` — Current dashboard structure
@@ -210,9 +210,9 @@ Add export action to each deck in the dashboard listing.
 Add import UI to dashboard (top or dedicated section).
 
 ### Acceptance Criteria
-- [ ] Dashboard renders `ImportControl` component
-- [ ] `ImportControl` is visible even when deck listing is empty
-- [ ] Import works as expected (file read, validation, merge)
+- [x] Dashboard renders `ImportControl` component
+- [x] `ImportControl` is visible even when deck listing is empty
+- [x] Import works as expected (file read, validation, merge)
 
 ### Files to Read (for context)
 - `components/Dashboard.tsx` — Current dashboard structure
@@ -230,9 +230,9 @@ Add import UI to dashboard (top or dedicated section).
 Add export action to the deck detail view header.
 
 ### Acceptance Criteria
-- [ ] Deck detail page renders `ExportControl` for displayed deck
+- [x] Deck detail page renders `ExportControl` for displayed deck
 - [ ] Export action is accessible and properly styled
-- [ ] Export works as expected
+- [x] Export works as expected
 
 ### Files to Read (for context)
 - `app/deck/[id]/page.tsx` — Deck detail page
@@ -250,11 +250,11 @@ Add export action to the deck detail view header.
 Write integration test covering the full export → import roundtrip.
 
 ### Acceptance Criteria
-- [ ] Export deck from dashboard
-- [ ] Import exported file
-- [ ] Imported deck matches original
-- [ ] No duplicate ID conflicts (or user resolves them)
-- [ ] Test passes
+- [~] Export deck from dashboard
+- [~] Import exported file
+- [~] Imported deck matches original
+- [~] No duplicate ID conflicts (or user resolves them)
+- [~] Test passes
 
 ### Files to Create
 - New test file or add to existing integration test suite
@@ -271,8 +271,8 @@ Write integration test covering the full export → import roundtrip.
 Write property-based test to verify all valid decks round-trip correctly.
 
 ### Acceptance Criteria
-- [ ] For all generated valid decks: `parseDeck(serializeDeck(deck))` produces equivalent deck
-- [ ] Test covers multiple iterations (e.g., 100+ examples)
+- [~] For all generated valid decks: `parseDeck(serializeDeck(deck))` produces equivalent deck
+- [~] Test covers multiple iterations (e.g., 100+ examples)
 - [ ] Test passes
 
 ### Files to Create
@@ -290,15 +290,15 @@ Write property-based test to verify all valid decks round-trip correctly.
 Verify import/export UI works end-to-end on the dashboard and deck detail pages.
 
 ### Acceptance Criteria
-- [ ] Export button visible on each deck card and deck detail page
-- [ ] Clicking export downloads `.json` file with correct name
-- [ ] Downloaded file contains valid JSON and can be re-imported
-- [ ] Import control visible on dashboard
-- [ ] File input accepts `.json` files
-- [ ] Importing valid file adds deck to listing
-- [ ] Importing invalid file displays error message
-- [ ] Duplicate ID resolution works (replace and new-id paths)
-- [ ] Feature works on mobile, tablet, and desktop widths
+- [~] Export button visible on each deck card and deck detail page
+- [~] Clicking export downloads `.json` file with correct name
+- [~] Downloaded file contains valid JSON and can be re-imported
+- [~] Import control visible on dashboard
+- [~] File input accepts `.json` files
+- [~] Importing valid file adds deck to listing
+- [~] Importing invalid file displays error message
+- [~] Duplicate ID resolution works (replace and new-id paths)
+- [~] Feature works on mobile, tablet, and desktop widths
 
 ### Implementation Notes
 - Test in browser dev tools or physical devices
@@ -312,11 +312,11 @@ Verify import/export UI works end-to-end on the dashboard and deck detail pages.
 Verify import/export UI is accessible.
 
 ### Acceptance Criteria
-- [ ] Export button has accessible label or icon with `aria-label`
-- [ ] File input has associated label
-- [ ] Error messages are announced to screen readers
-- [ ] Modal has proper ARIA attributes (role, aria-labelledby, etc.)
-- [ ] Keyboard navigation works (Tab through controls, Enter to confirm)
+- [~] Export button has accessible label or icon with `aria-label`
+- [~] File input has associated label
+- [~] Error messages are announced to screen readers
+- [~] Modal has proper ARIA attributes (role, aria-labelledby, etc.)
+- [~] Keyboard navigation works (Tab through controls, Enter to confirm)
 
 ### Implementation Notes
 - Test with screen reader if available
@@ -330,10 +330,10 @@ Verify import/export UI is accessible.
 Document the feature and prepare for handoff/deployment.
 
 ### Acceptance Criteria
-- [ ] Feature is complete and all tests pass
-- [ ] README or inline documentation explains how to use import/export
-- [ ] Code comments explain key logic
-- [ ] No outstanding bugs or TODOs
+- [~] Feature is complete and all tests pass
+- [~] README or inline documentation explains how to use import/export
+- [~] Code comments explain key logic
+- [~] No outstanding bugs or TODOs
 
 ### Implementation Notes
 - Update component README if applicable
