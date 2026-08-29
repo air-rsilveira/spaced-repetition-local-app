@@ -8,11 +8,12 @@ export interface CardListProps {
 }
 
 /**
- * CardList — renders a deck's cards.
+ * CardList — renders a deck's cards as a responsive, centered grid.
  *
- * Server Component: it takes a `cards` array and derives everything from that
- * shape. Maps each card to a `CardItem` and renders an empty-cards state when
- * the deck has no cards. Threads the edit/delete callbacks to each `CardItem`.
+ * Server Component: it takes a `cards` array and maps each card to a
+ * `CardItem`, threading the edit/delete callbacks. The empty-cards state is
+ * owned by the deck page (which pairs the message with an "Add card" control),
+ * so this component is only rendered when there is at least one card.
  *
  * Requirements: 1.3, 1.7
  */
@@ -21,27 +22,6 @@ export default function CardList({
   onEdit,
   onDelete,
 }: CardListProps) {
-  if (cards.length === 0) {
-    return (
-      <section
-        aria-labelledby="empty-cards-heading"
-        className="flex flex-1 flex-col items-center justify-center px-4 py-16 sm:px-6 lg:px-8 text-center"
-      >
-        <div className="w-full max-w-md rounded-lg border border-aws-gray-200 bg-aws-white p-8 shadow-sm sm:p-12">
-          <h2
-            id="empty-cards-heading"
-            className="text-2xl font-semibold tracking-tight text-aws-gray-900"
-          >
-            No cards yet
-          </h2>
-          <p className="mt-3 text-base leading-7 text-aws-gray-600">
-            This deck is empty. Click &quot;Add card&quot; to create your first study card.
-          </p>
-        </div>
-      </section>
-    );
-  }
-
   return (
     <section className="px-4 py-8 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">

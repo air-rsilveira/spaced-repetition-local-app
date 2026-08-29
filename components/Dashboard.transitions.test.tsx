@@ -3,6 +3,7 @@ import { cleanup, render, screen } from "@testing-library/react";
 
 import Dashboard from "@/components/Dashboard";
 import EmptyState from "@/components/EmptyState";
+import { UIActionsProvider } from "@/contexts/UIActionsContext";
 import { useDecks } from "@/contexts/DecksContext";
 import type {
   DecksContextValue,
@@ -55,7 +56,7 @@ describe("Dashboard state transitions and error indication", () => {
   // deck listing.
   it("replaces the empty state with the deck listing when decks go from 0 to 1+", () => {
     mockedUseDecks.mockReturnValue(makeStore(emptyDeckList, "ready"));
-    const { rerender } = render(<Dashboard />);
+    const { rerender } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // Empty state is shown; no deck listing.
     expect(
@@ -86,7 +87,7 @@ describe("Dashboard state transitions and error indication", () => {
     mockedUseDecks.mockReturnValue(
       makeStore(emptyDeckList, "initial"),
     );
-    render(<Dashboard />);
+    render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // Loading indication is shown (via aria-live status region).
     expect(screen.getByRole("status")).toBeInTheDocument();
@@ -108,7 +109,7 @@ describe("Dashboard state transitions and error indication", () => {
     mockedUseDecks.mockReturnValue(
       makeStore(emptyDeckList, "initial"),
     );
-    const { rerender } = render(<Dashboard />);
+    const { rerender } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // During initial, LoadingState renders.
     expect(screen.getByRole("status")).toBeInTheDocument();
@@ -134,7 +135,7 @@ describe("Dashboard state transitions and error indication", () => {
     mockedUseDecks.mockReturnValue(
       makeStore(emptyDeckList, "initial"),
     );
-    const { rerender } = render(<Dashboard />);
+    const { rerender } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // During initial, LoadingState renders.
     expect(screen.getByRole("status")).toBeInTheDocument();
@@ -157,7 +158,7 @@ describe("Dashboard state transitions and error indication", () => {
   // empty state (when status is ready).
   it("replaces the deck listing with the empty state when decks go from 1+ to 0", () => {
     mockedUseDecks.mockReturnValue(makeStore(singleDeckList, "ready"));
-    const { rerender } = render(<Dashboard />);
+    const { rerender } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // Listing is shown; empty state is not.
     expect(
@@ -193,7 +194,7 @@ describe("Dashboard state transitions and error indication", () => {
     // Error phase: status is "error", with decks present in state to prove they
     // are retained but not rendered.
     mockedUseDecks.mockReturnValue(makeStore(mockDeckList, "error", error));
-    const { rerender } = render(<Dashboard />);
+    const { rerender } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // Error state renders (via role="alert").
     expect(screen.getByRole("alert")).toBeInTheDocument();
@@ -248,7 +249,7 @@ describe("Dashboard state transitions and error indication", () => {
     // Include decks in state to prove they are retained but NOT rendered while
     // the status is "error".
     mockedUseDecks.mockReturnValue(makeStore(mockDeckList, "error", error));
-    render(<Dashboard />);
+    render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // Error indication present via role="alert".
     expect(screen.getByRole("alert")).toBeInTheDocument();
@@ -268,7 +269,7 @@ describe("EmptyState entry points", () => {
   // Requirement 6.2: the empty state presents a create-deck entry point.
   it("shows the create entry point when the Dashboard renders with 0 decks", () => {
     mockedUseDecks.mockReturnValue(makeStore(emptyDeckList, "ready"));
-    render(<Dashboard />);
+    render(<Dashboard />, { wrapper: UIActionsProvider });
 
     expect(
       screen.getByRole("button", { name: /create deck/i }),

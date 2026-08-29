@@ -2,6 +2,7 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { cleanup, render, screen, within } from "@testing-library/react";
 
 import Dashboard from "@/components/Dashboard";
+import { UIActionsProvider } from "@/contexts/UIActionsContext";
 import { singleDeckList, mockDeckList } from "@/mocks";
 import type { DeckList } from "@/types";
 
@@ -38,7 +39,7 @@ describe("Dashboard deck listing (Requirement 8.6)", () => {
     expect(mockDeckList.length).toBeLessThanOrEqual(3);
 
     mockStore(mockDeckList);
-    render(<Dashboard />);
+    render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // Every deck renders: each DeckCard shows the deck name in an <h3>.
     for (const deck of mockDeckList) {
@@ -57,13 +58,21 @@ describe("Dashboard deck listing (Requirement 8.6)", () => {
     expect(
       screen.queryByRole("heading", { name: /no decks/i }),
     ).not.toBeInTheDocument();
+
+    // The listing is a single centered column: the list stacks items with
+    // flex-col and the container is centered with a constrained width.
+    expect(list).toHaveClass("flex");
+    expect(list).toHaveClass("flex-col");
+    const centeredContainer = list.closest(".mx-auto");
+    expect(centeredContainer).not.toBeNull();
+    expect(centeredContainer).toHaveClass("max-w-2xl");
   });
 
   it("renders exactly one deck for a single-deck mock store (lower bound of the 1-3 range)", () => {
     expect(singleDeckList).toHaveLength(1);
 
     mockStore(singleDeckList);
-    render(<Dashboard />);
+    render(<Dashboard />, { wrapper: UIActionsProvider });
 
     const [deck] = singleDeckList;
     expect(

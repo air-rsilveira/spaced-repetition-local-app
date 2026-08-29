@@ -1,10 +1,25 @@
 "use client";
 
-import { useState, useRef, useId } from "react";
+import {
+  useState,
+  useRef,
+  useId,
+  useImperativeHandle,
+  forwardRef,
+} from "react";
 import type { Deck } from "@/types";
 import { useDecks } from "@/contexts/DecksContext";
 import { parseDeck } from "@/lib/deckIO";
 import ErrorState from "./ErrorState";
+
+/**
+ * Imperative handle exposed by `ImportControl` so a separate trigger (e.g. the
+ * "Upload deck" button in the contextual action bar) can open the hidden file
+ * picker without owning the import logic.
+ */
+export interface ImportControlHandle {
+  openFilePicker: () => void;
+}
 
 interface DuplicateResolutionState {
   importedDeck: Deck;
@@ -26,14 +41,30 @@ interface DuplicateResolutionState {
  * Accessibility: the file input has a label, error messages are announced as
  * alerts, and the duplicate modal has proper ARIA attributes.
  *
+ * The visible file input is hidden by default so the "Upload deck" trigger in
+ * the contextual action bar can open the native picker via the imperative
+ * `openFilePicker()` handle. A visually hidden (`sr-only`) label keeps the
+ * input accessible.
+ *
  * Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 4.1, 4.2, 4.3, 4.4, 4.5, 5.1, 5.2, 5.3, 5.4, 5.5
  */
-export default function ImportControl() {
+const ImportControl = forwardRef<ImportControlHandle>(
+  function ImportControl(_props, ref) {
   const { decks, addDeck, replaceDeck } = useDecks();
   const [error, setError] = useState<string | null>(null);
   const [isDuplicateModalOpen, setIsDuplicateModalOpen] =
     useState<DuplicateResolutionState | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useImperativeHandle(
+    ref,
+    () => ({
+      openFilePicker: () => {
+        fileInputRef.current?.click();
+      },
+    }),
+    [],
+  );
 
   /**
    * Generates a unique ID by appending a timestamp to the original ID.
@@ -202,22 +233,20 @@ export default function ImportControl() {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex flex-col gap-2">
-        <label
-          htmlFor="import-file"
-          className="text-sm font-medium text-aws-gray-900"
-        >
-          Import a deck from JSON
-        </label>
-        <input
-          ref={fileInputRef}
-          id="import-file"
-          type="file"
-          accept=".json"
-          onChange={handleFileSelect}
-          className="block w-full text-sm text-aws-gray-900 file:mr-4 file:rounded-md file:border file:border-aws-blue file:bg-aws-white file:px-4 file:py-2 file:text-sm file:font-medium file:text-aws-blue hover:file:bg-aws-gray-100"
-        />
-      </div>
+      {/* The label and input are visually hidden; the "Upload deck" trigger in
+          the contextual action bar opens the picker via openFilePicker(). The
+          label stays in the accessibility tree so the input remains labeled. */}
+      <label htmlFor="import-file" className="sr-only">
+        Import a deck from JSON
+      </label>
+      <input
+        ref={fileInputRef}
+        id="import-file"
+        type="file"
+        accept=".json"
+        onChange={handleFileSelect}
+        className="sr-only"
+      />
 
       {error && (
         <ErrorState
@@ -237,7 +266,9 @@ export default function ImportControl() {
       )}
     </div>
   );
-}
+});
+
+export default ImportControl;
 
 interface DuplicateResolutionModalProps {
   importedDeck: Deck;

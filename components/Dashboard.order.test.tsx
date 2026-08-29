@@ -3,6 +3,7 @@ import fc from "fast-check";
 import { cleanup, render } from "@testing-library/react";
 
 import Dashboard from "@/components/Dashboard";
+import { UIActionsProvider } from "@/contexts/UIActionsContext";
 import { arbDeck } from "@/test/arbitraries";
 import type { Deck } from "@/types";
 
@@ -46,7 +47,9 @@ describe("Dashboard deck listing order", () => {
       fc.property(arbUniqueNonEmptyDeckList, (decks) => {
         mockDecks = decks;
 
-        const { container } = render(<Dashboard />);
+        const { container } = render(<Dashboard />, {
+          wrapper: UIActionsProvider,
+        });
 
         try {
           // Each deck renders as exactly one <article> (DeckCard), so the count

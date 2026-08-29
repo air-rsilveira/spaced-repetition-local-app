@@ -31,7 +31,9 @@ export default function EmptyState({ onCreate }: EmptyStateProps) {
           No decks yet
         </h2>
         <p className="mt-3 text-base leading-7 text-aws-gray-600">
-          Create a new deck to start studying.
+          Your memory&rsquo;s workout starts here. Create your first deck, or
+          upload one you already have, and let spaced repetition do the heavy
+          lifting.
         </p>
         <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
           <button

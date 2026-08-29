@@ -13,6 +13,7 @@ vi.mock("@/contexts/DecksContext", () => ({
 }));
 
 import Dashboard from "@/components/Dashboard";
+import { UIActionsProvider } from "@/contexts/UIActionsContext";
 
 describe("Dashboard empty state", () => {
   afterEach(() => {
@@ -38,7 +39,7 @@ describe("Dashboard empty state", () => {
       gradeCardIncorrect: vi.fn(),
     });
 
-    const { container } = render(<Dashboard />);
+    const { container } = render(<Dashboard />, { wrapper: UIActionsProvider });
 
     // The EmptyState is present: its "no decks" heading and the "Create deck"
     // button render (Requirements 3.1, 9.4).

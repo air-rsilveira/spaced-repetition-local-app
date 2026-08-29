@@ -2,6 +2,8 @@ import { describe, expect, it, vi, afterEach } from "vitest";
 import { render, screen, within, cleanup } from "@testing-library/react";
 import { act } from "@testing-library/react";
 import DeckDetailPage from "./page";
+import ContextualActionBar from "@/components/ContextualActionBar";
+import { UIActionsProvider } from "@/contexts/UIActionsContext";
 import { makeDeck, makeCards } from "@/mocks";
 
 // Mock next/link to avoid Next.js routing during tests
@@ -9,6 +11,14 @@ vi.mock("next/link", () => ({
   default: ({ href, children }: { href: string; children: React.ReactNode }) =>
     <a href={href}>{children}</a>,
 }));
+
+// Drive the contextual action bar's route detection deterministically.
+vi.mock("next/navigation", () => ({
+  usePathname: vi.fn(() => "/deck/deck-1"),
+}));
+
+import { usePathname } from "next/navigation";
+const mockUsePathname = vi.mocked(usePathname);
 
 // Mock the DecksContext to control the store state
 const mockUseDecks = vi.fn();
@@ -20,21 +30,38 @@ vi.mock("@/contexts/DecksContext", () => ({
 afterEach(() => {
   cleanup();
   mockUseDecks.mockReset();
+  mockUsePathname.mockReturnValue("/deck/deck-1");
 });
+
+/**
+ * Renders the deck page together with the contextual action bar inside the
+ * UIActions provider, mirroring the real app shell. The page registers its
+ * deck actions and the bar renders them (deck name, Add card, Study).
+ */
+async function renderDeckPage(id: string) {
+  mockUsePathname.mockReturnValue(`/deck/${id}`);
+  const params = Promise.resolve({ id });
+  await act(async () => {
+    render(
+      <UIActionsProvider>
+        <ContextualActionBar />
+        <DeckDetailPage params={params} />
+      </UIActionsProvider>,
+    );
+  });
+  await new Promise((resolve) => setTimeout(resolve, 0));
+}
 
 /**
  * Unit tests for the deck detail page navigation and states.
  *
- * Tests verify that:
- * - Loading phase renders LoadingState while store status is "initial"
- * - Not-found state renders ErrorState with Back-to-Dashboard action
- * - "Start review" and "Back to Dashboard" links target correct hrefs
- * - Empty deck renders empty state with focusable add-card control
- *
- * Requirements: 1.3, 1.4, 1.9, 2.2, 3.2, 4.2
+ * With the contextual action bar migration, the deck name, "Add card", and
+ * "Study" live in the bar (not a page-body header). The page body renders only
+ * the card grid or the empty state. Export and Back-to-Dashboard are no longer
+ * part of the deck chrome (Back-to-Dashboard remains only on the not-found
+ * error affordance).
  */
 describe("DeckDetailPage", () => {
-  // Requirement 2.2: Loading phase while status is "initial"
   it("renders LoadingState while store status is 'initial'", async () => {
     mockUseDecks.mockReturnValue({
       decks: [],
@@ -43,15 +70,8 @@ describe("DeckDetailPage", () => {
       deleteCard: vi.fn(),
     });
 
-    const params = Promise.resolve({ id: "deck-1" });
-    await act(async () => {
-      render(<DeckDetailPage params={params} />);
-    });
+    await renderDeckPage("deck-1");
 
-    // Give it time to settle
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    // LoadingState renders with role="status" and aria-live="polite"
     const loadingRegion = screen.queryByRole("status");
     expect(loadingRegion).toBeInTheDocument();
     if (loadingRegion) {
@@ -60,7 +80,6 @@ describe("DeckDetailPage", () => {
     }
   });
 
-  // Requirement 4.2: Not-found renders ErrorState with Back-to-Dashboard action
   it("renders ErrorState with Back-to-Dashboard link when deck is not found", async () => {
     mockUseDecks.mockReturnValue({
       decks: [],
@@ -69,14 +88,8 @@ describe("DeckDetailPage", () => {
       deleteCard: vi.fn(),
     });
 
-    const params = Promise.resolve({ id: "nonexistent-deck" });
-    await act(async () => {
-      render(<DeckDetailPage params={params} />);
-    });
+    await renderDeckPage("nonexistent-deck");
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    // ErrorState renders with role="alert" for not-found condition
     const alert = screen.queryByRole("alert");
     expect(alert).toBeInTheDocument();
     if (alert) {
@@ -85,7 +98,6 @@ describe("DeckDetailPage", () => {
         within(alert).getByText(/the deck was not found or has been deleted/i),
       ).toBeInTheDocument();
 
-      // ErrorState action contains Back-to-Dashboard link
       const backLink = within(alert).queryByRole("link", {
         name: /back to dashboard/i,
       });
@@ -96,10 +108,9 @@ describe("DeckDetailPage", () => {
     }
   });
 
-  // Requirement 1.3, 1.4, 1.9: Navigation controls have correct hrefs
-  it("renders 'Start review' link targeting /deck/[id]/review and 'Back to Dashboard' link targeting /", async () => {
+  it("shows the deck name and a 'Study' link to the review route in the action bar", async () => {
     const testDeck = makeDeck({
-      id: "deck-123",
+      id: "deck-1",
       name: "Test Deck",
       cards: makeCards(5),
     });
@@ -111,36 +122,30 @@ describe("DeckDetailPage", () => {
       deleteCard: vi.fn(),
     });
 
-    const params = Promise.resolve({ id: testDeck.id });
-    await act(async () => {
-      render(<DeckDetailPage params={params} />);
-    });
+    await renderDeckPage(testDeck.id);
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
+    // Deck name renders in the action bar (level-1 heading).
+    expect(
+      screen.getByRole("heading", { level: 1, name: testDeck.name }),
+    ).toBeInTheDocument();
 
-    // "Back to Dashboard" link targets "/"
-    const backLink = screen.queryAllByRole("link").find((link) =>
-      link.textContent?.includes("Back to Dashboard"),
-    );
-    expect(backLink).toBeInTheDocument();
-    if (backLink) {
-      expect(backLink).toHaveAttribute("href", "/");
-    }
+    // "Study" replaces "Start review" and targets the review route.
+    expect(screen.queryByText(/start review/i)).not.toBeInTheDocument();
+    const studyLink = screen.getByRole("link", { name: /study/i });
+    expect(studyLink).toHaveAttribute("href", `/deck/${testDeck.id}/review`);
 
-    // "Start review" link targets /deck/[id]/review
-    const startReviewLink = screen.queryAllByRole("link").find((link) =>
-      link.textContent?.includes("Start review"),
-    );
-    expect(startReviewLink).toBeInTheDocument();
-    if (startReviewLink) {
-      expect(startReviewLink).toHaveAttribute("href", `/deck/${testDeck.id}/review`);
-    }
+    // No Export control and no in-body Back-to-Dashboard on the content phase.
+    expect(
+      screen.queryByRole("button", { name: /export/i }),
+    ).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("link", { name: /back to dashboard/i }),
+    ).not.toBeInTheDocument();
   });
 
-  // Requirement 3.2: Empty deck renders empty state with focusable add-card control
-  it("renders empty state with focusable 'Add card' control when deck has no cards", async () => {
+  it("renders empty state with an 'Add card' control when deck has no cards", async () => {
     const emptyDeck = makeDeck({
-      id: "empty-deck",
+      id: "deck-1",
       name: "Empty Deck",
       description: "A brand-new deck with no cards",
       cards: [],
@@ -153,46 +158,36 @@ describe("DeckDetailPage", () => {
       deleteCard: vi.fn(),
     });
 
-    const params = Promise.resolve({ id: emptyDeck.id });
-    await act(async () => {
-      render(<DeckDetailPage params={params} />);
-    });
+    await renderDeckPage(emptyDeck.id);
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    // Empty state heading is rendered
-    const heading = screen.queryByRole("heading", { name: /no cards yet/i });
-    expect(heading).toBeInTheDocument();
-
-    // Empty state message explains what to do
+    // Empty-state heading and message.
     expect(
-      screen.queryByText(/add cards to this deck to start studying/i),
+      screen.getByRole("heading", { name: /no cards yet/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByText(/add your first card to start studying/i),
     ).toBeInTheDocument();
 
-    // "Add card" button is rendered and is keyboard-focusable
-    const addCardButton = screen.queryByRole("button", { name: /add card/i });
-    expect(addCardButton).toBeInTheDocument();
-    if (addCardButton) {
-      expect(addCardButton).toHaveAttribute("type", "button");
-    }
+    // "Add card" is present (the action bar's + the empty-state button both use
+    // this label; at least one is present and is keyboard-focusable).
+    const addCardButtons = screen.getAllByRole("button", { name: /add card/i });
+    expect(addCardButtons.length).toBeGreaterThanOrEqual(1);
 
-    // Deck header still shows deck name and description
+    // Deck name renders via the action bar.
     expect(
-      screen.queryByRole("heading", { level: 1, name: emptyDeck.name }),
+      screen.getByRole("heading", { level: 1, name: emptyDeck.name }),
     ).toBeInTheDocument();
-    expect(screen.queryByText(emptyDeck.description!)).toBeInTheDocument();
 
-    // Back-to-Dashboard is present in empty state
-    const backLink = screen.queryAllByRole("link").find((link) =>
-      link.textContent?.includes("Back to Dashboard"),
-    );
-    expect(backLink).toBeInTheDocument();
+    // Description is dropped from the deck page; Export is gone.
+    expect(screen.queryByText(emptyDeck.description!)).not.toBeInTheDocument();
+    expect(
+      screen.queryByRole("button", { name: /export/i }),
+    ).not.toBeInTheDocument();
   });
 
-  // Additional: Verify content phase renders correctly with cards
-  it("renders deck content and cards when deck has cards and is ready", async () => {
+  it("renders deck cards when deck has cards and is ready", async () => {
     const deckWithCards = makeDeck({
-      id: "deck-with-cards",
+      id: "deck-1",
       name: "Study Deck",
       cards: makeCards(3),
     });
@@ -204,31 +199,21 @@ describe("DeckDetailPage", () => {
       deleteCard: vi.fn(),
     });
 
-    const params = Promise.resolve({ id: deckWithCards.id });
-    await act(async () => {
-      render(<DeckDetailPage params={params} />);
-    });
+    await renderDeckPage(deckWithCards.id);
 
-    await new Promise((resolve) => setTimeout(resolve, 0));
-
-    // Deck header renders with name
+    // Deck name via the action bar.
     expect(
-      screen.queryByRole("heading", { level: 1, name: deckWithCards.name }),
+      screen.getByRole("heading", { level: 1, name: deckWithCards.name }),
     ).toBeInTheDocument();
 
-    // Navigation controls are present
-    const backLink = screen.queryAllByRole("link").find((link) =>
-      link.textContent?.includes("Back to Dashboard"),
-    );
-    expect(backLink).toBeInTheDocument();
+    // "Add card" and "Study" are reachable from the bar.
+    expect(
+      screen.getByRole("button", { name: /add card/i }),
+    ).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: /study/i })).toBeInTheDocument();
 
-    const startReviewLink = screen.queryAllByRole("link").find((link) =>
-      link.textContent?.includes("Start review"),
-    );
-    expect(startReviewLink).toBeInTheDocument();
-
-    // "Add card" button is present in header
-    const addCardButton = screen.queryByRole("button", { name: /add card/i });
-    expect(addCardButton).toBeInTheDocument();
+    // The card grid renders one list item per card.
+    const list = screen.getByRole("list");
+    expect(within(list).getAllByRole("listitem")).toHaveLength(3);
   });
 });
